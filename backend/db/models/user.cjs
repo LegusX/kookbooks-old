@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 			return {
 				name: this.dataValues.name,
 				username: this.dataValues.username,
+				id: this.dataValues.id,
 			};
 		}
 	}
