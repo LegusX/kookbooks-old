@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
-			this.hasMany(models.Recipe);
+			this.belongsToMany(models.Recipe, { through: "RecipeIngredients" });
 		}
 	}
 	Ingredient.init(
@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 			id: {
 				type: DataTypes.UUIDV4,
 				defaultValue: DataTypes.UUIDV4,
+				primaryKey: true,
 			},
 			name: {
 				type: DataTypes.STRING(32),

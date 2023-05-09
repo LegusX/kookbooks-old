@@ -12,6 +12,30 @@ module.exports = (sequelize, DataTypes) => {
 			this.hasMany(models.Book);
 			this.hasMany(models.Recipe);
 			this.hasMany(models.Image);
+			this.Book = models.Book;
+			this.Recipe = models.Recipe;
+			this.Image = models.Image;
+		}
+
+		//static methods
+		static async get(id) {
+			const user = await this.findOne({ where: { id: id } });
+			return user;
+		}
+		static async getBasic(id) {
+			const user = await this.get(id);
+			if (user === null) return null;
+
+			return user.clean();
+		}
+
+		//dynamic methods
+		//only return non-sensitive information
+		clean() {
+			return {
+				name: this.dataValues.name,
+				username: this.dataValues.username,
+			};
 		}
 	}
 	User.init(
@@ -19,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
 			id: {
 				type: DataTypes.UUIDV4,
 				defaultValue: DataTypes.UUIDV4,
+				primaryKey: true,
 			},
 			name: {
 				type: DataTypes.STRING,
