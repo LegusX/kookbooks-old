@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
-			this.belongsToMany(models.Book);
+			this.belongsToMany(models.Book, { through: "BookRecipes" });
 			this.belongsTo(models.User);
 			this.hasMany(models.Image);
-			this.hasMany(models.Ingredient);
+			this.belongsToMany(models.Ingredient, { through: "RecipeIngredients" });
 		}
 	}
 	Recipe.init(
@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
 			id: {
 				type: DataTypes.UUIDV4,
 				defaultValue: DataTypes.UUIDV4,
+				primaryKey: true,
 			},
 			name: {
 				type: DataTypes.STRING,
