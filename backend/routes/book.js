@@ -27,6 +27,7 @@ router.get("/", async (req, res) => {
 	}
 });
 
+//create book
 router.post("/", ensureLoggedIn("/login"), async (req, res) => {
 	try {
 		if (req.body.name.length < 3) res.status(400).send("name");
@@ -37,7 +38,6 @@ router.post("/", ensureLoggedIn("/login"), async (req, res) => {
 			user: req.user._id,
 			// thumbnail:???
 			subscribers: [req.user._id],
-			recipes: [],
 		});
 		book.save();
 		res.status(201).json(book.clean());
@@ -47,6 +47,7 @@ router.post("/", ensureLoggedIn("/login"), async (req, res) => {
 	}
 });
 
+//get book by id
 router.get("/:id", async (req, res) => {
 	try {
 		const id = req.params.id;

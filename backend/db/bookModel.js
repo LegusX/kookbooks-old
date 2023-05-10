@@ -5,7 +5,6 @@ export default function (mongoose) {
 		user: { type: mongoose.ObjectId, ref: "User", required: true },
 		thumbnail: { type: mongoose.ObjectId, ref: "Image" },
 		subscribers: [{ type: mongoose.ObjectId, ref: "User" }],
-		recipes: [{ type: mongoose.ObjectId, ref: "Recipe" }],
 	});
 	schema.methods.clean = function () {
 		return {
@@ -13,7 +12,6 @@ export default function (mongoose) {
 			name: this.name,
 			description: this.description,
 			thumbnail: this.thumbnail,
-			recipes: this.recipes,
 			user: this.user,
 		};
 	};
