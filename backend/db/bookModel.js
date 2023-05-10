@@ -5,6 +5,7 @@ export default function (mongoose) {
 		user: { type: mongoose.ObjectId, ref: "User", required: true },
 		thumbnail: { type: mongoose.ObjectId, ref: "Image" },
 		subscribers: [{ type: mongoose.ObjectId, ref: "User" }],
+		editors: [{ type: mongoose.ObjectId, ref: "User" }],
 	});
 	schema.methods.clean = function () {
 		return {
