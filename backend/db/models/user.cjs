@@ -12,15 +12,18 @@ module.exports = (sequelize, DataTypes) => {
 			this.hasMany(models.Book);
 			this.hasMany(models.Recipe);
 			this.hasMany(models.Image);
+			this.belongsToMany(models.Book, { through: "UserSubscribedBooks" });
 			this.Book = models.Book;
 			this.Recipe = models.Recipe;
 			this.Image = models.Image;
 		}
 
 		//static methods
-		static async get(id) {
-			const user = await this.findOne({ where: { id: id } });
-			return user;
+		//return
+		static async get(id, model) {
+			if (typeof model !== undefined)
+				return await this.findOne({ where: { id: id }, include: model });
+			else return await this.findOne({ where: { id: id }, subQuery: false });
 		}
 		static async getBasic(id) {
 			const user = await this.get(id);
@@ -33,9 +36,9 @@ module.exports = (sequelize, DataTypes) => {
 		//only return non-sensitive information
 		clean() {
 			return {
-				name: this.dataValues.name,
-				username: this.dataValues.username,
-				id: this.dataValues.id,
+				name: this.name,
+				username: this.username,
+				id: this.id,
 			};
 		}
 	}

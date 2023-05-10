@@ -21,6 +21,17 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
+router.get("/:id/recipes", async (req, res) => {
+	try {
+		const user = await req.db.User.get(req.params.id);
+		if (user === null) return res.status(404).end();
+		res.json(await user.getRecipes());
+	} catch (e) {
+		console.error(e);
+		res.status(500).send("Failed to GET user's recipes");
+	}
+});
+
 router.post("/", async (req, res) => {
 	try {
 		//new user validation
