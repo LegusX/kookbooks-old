@@ -9,8 +9,27 @@ const emailRegex = new RegExp(
 
 const router = new Router();
 
-router.get("/", (req, res) => {
-	res.send("hello");
+router.get("/:id", async (req, res) => {
+	try {
+		//eventually include check for authenticated user, and if they are requesting themselves, give full details
+		const user = await req.db.User.get(req.params.id);
+		if (user === null) res.status(404).end();
+		else res.status(200).json(user.clean());
+	} catch (e) {
+		console.error(e);
+		res.status(500).send("Failed to GET user");
+	}
+});
+
+router.get("/:id/recipes", async (req, res) => {
+	try {
+		const user = await req.db.User.get(req.params.id);
+		if (user === null) return res.status(404).end();
+		res.json(await user.getRecipes());
+	} catch (e) {
+		console.error(e);
+		res.status(500).send("Failed to GET user's recipes");
+	}
 });
 
 router.post("/", async (req, res) => {
@@ -41,11 +60,11 @@ router.post("/", async (req, res) => {
 				password,
 			});
 			//perform authentication things here
-			res.status(200).json(user.clean());
+			res.status(201).json(user.clean());
 		}
 	} catch (e) {
 		console.error(e);
-		res.status(502).send("Failed to POST user");
+		res.status(500).send("Failed to POST user");
 	}
 
 	res.end();
