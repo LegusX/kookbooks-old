@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { ensureLoggedIn } from "connect-ensure-login";
-import mongoose from "mongoose";
 
 const router = new Router();
 

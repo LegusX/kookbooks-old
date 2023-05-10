@@ -9,6 +9,7 @@ import passport from "passport";
 import UserRoute from "./routes/user.js";
 import AuthRoute from "./routes/auth.js";
 import BookRoute from "./routes/book.js";
+import RecipeRoute from "./routes/recipe.js";
 
 dotenv.config();
 db().then(({ mongoose, models }) => {
@@ -40,7 +41,7 @@ db().then(({ mongoose, models }) => {
 
 	app.use("/user", UserRoute);
 	app.use("/book", BookRoute);
-
+	app.use("/recipe", RecipeRoute);
 	app.use("/auth", AuthRoute(models));
 
 	app.get("/", (req, res) => {
