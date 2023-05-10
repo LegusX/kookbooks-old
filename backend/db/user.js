@@ -23,4 +23,5 @@ export default function (mongoose) {
 		};
 	};
 	const Model = mongoose.model("User", schema);
+	return Model;
 }

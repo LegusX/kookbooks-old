@@ -10,4 +10,5 @@ export default function (mongoose) {
 		});
 	};
 	const Model = mongoose.model("Ingredient", schema);
+	return Model;
 }

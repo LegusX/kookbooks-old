@@ -13,5 +13,6 @@ export default function (mongoose) {
 			this.models[name] = models[name];
 		});
 	};
-	const Model = mongoose.model("Recipe", schema);
+	const Model = mongoose.model("Book", schema);
+	return Model;
 }

@@ -14,4 +14,5 @@ export default function (mongoose) {
 		});
 	};
 	const Model = mongoose.model("Recipe", schema);
+	return Model;
 }
