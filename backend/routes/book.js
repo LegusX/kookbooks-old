@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { ensureLoggedIn } from "connect-ensure-login";
 
 const router = new Router();
 
@@ -16,9 +17,7 @@ router.get("/", async (req, res) => {
 		else books = await req.db.Book.find({ _id: { $gt: id } }).limit(limit);
 
 		for (let i = 0; i < books.length; i++) {
-			let book = books[i];
-			delete book.subscribers;
-			books[i] = book;
+			books[i] = books[i].clean();
 		}
 		res.status(200).json(books);
 	} catch (e) {
@@ -27,8 +26,20 @@ router.get("/", async (req, res) => {
 	}
 });
 
-router.post("/", async (req, res) => {
+router.post("/", ensureLoggedIn("/login"), async (req, res) => {
 	try {
+		if (req.body.name.length < 3) res.status(400).send("name");
+
+		const book = new req.db.Book({
+			name: req.body.name,
+			description: req.body.description,
+			user: req.user._id,
+			// thumbnail:???
+			subscribers: [req.user._id],
+			recipes: [],
+		});
+		book.save();
+		res.redirect("/book/" + book.id);
 	} catch (e) {
 		console.error(e);
 		res.status(500).send("Failed to POST book");
