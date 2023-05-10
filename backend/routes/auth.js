@@ -8,15 +8,12 @@ passport.use(
 	new LocalStrategy(
 		{ passReqToCallback: true },
 		(req, username, password, callback) => {
-			console.log(req);
 			req.db.User.findOne({ username: username }).then((user) => {
 				if (user === null) return callback(403);
 
 				if (compareSync(password, user.password)) {
-					console.log("authenticated");
 					callback(null, user);
 				} else {
-					console.log("failed to authenticate");
 					return callback(404);
 				}
 			});
@@ -49,7 +46,7 @@ export default function (models) {
 		})
 	);
 
-	router.post("logout", (req, res, next) => {
+	router.post("/logout", (req, res, next) => {
 		req.logout((err) => {
 			if (err) return next(err);
 			res.redirect("/");

@@ -60,8 +60,12 @@ router.post("/", async (req, res) => {
 				images: [],
 			});
 			user.save();
-			//perform authentication things here
-			res.status(201).json(user.clean());
+
+			//authenticate user
+			req.login(user, (err) => {
+				if (err) return console.log(err); //idk what kind of errors are going to appear so we'll just ditch them
+				res.redirect("/home");
+			});
 		}
 	} catch (e) {
 		console.error(e);
