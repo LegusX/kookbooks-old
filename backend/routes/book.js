@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { ensureLoggedIn } from "connect-ensure-login";
+import mongoose from "mongoose";
 
 const router = new Router();
 
@@ -22,7 +23,7 @@ router.get("/", async (req, res) => {
 		res.status(200).json(books);
 	} catch (e) {
 		console.error(e);
-		res.status(500).send("Failed to GET book");
+		res.status(500).send("Failed to GET books");
 	}
 });
 
@@ -39,10 +40,24 @@ router.post("/", ensureLoggedIn("/login"), async (req, res) => {
 			recipes: [],
 		});
 		book.save();
-		res.redirect("/book/" + book.id);
+		res.status(201).json(book.clean());
 	} catch (e) {
 		console.error(e);
 		res.status(500).send("Failed to POST book");
+	}
+});
+
+router.get("/:id", async (req, res) => {
+	try {
+		const id = req.params.id;
+		if (id.length !== 24) return res.status(400).end();
+
+		const book = await req.db.Book.findById(id);
+		if (book === null) return res.status(404).end();
+		else res.json(book.clean());
+	} catch (e) {
+		console.error(e);
+		res.status(500).send("Failed to GET book");
 	}
 });
 
