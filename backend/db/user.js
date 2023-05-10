@@ -15,5 +15,12 @@ export default function (mongoose) {
 			this.models[name] = models[name];
 		});
 	};
+	schema.methods.clean = function () {
+		return {
+			name: this.name,
+			username: this.username,
+			id: this.id,
+		};
+	};
 	const Model = mongoose.model("User", schema);
 }
