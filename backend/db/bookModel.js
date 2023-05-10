@@ -7,12 +7,6 @@ export default function (mongoose) {
 		subscribers: [{ type: mongoose.ObjectId, ref: "User" }],
 		recipes: [{ type: mongoose.ObjectId, ref: "Recipe" }],
 	});
-	schema.statics.init = function (models) {
-		this.models = {};
-		Object.getOwnPropertyNames((name) => {
-			this.models[name] = models[name];
-		});
-	};
 	const Model = mongoose.model("Book", schema);
 	return Model;
 }

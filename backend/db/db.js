@@ -17,8 +17,5 @@ export default async function db() {
 		Ingredient: IngredientModel(mongoose),
 		Book: BookModel(mongoose),
 	};
-	Object.getOwnPropertyNames(models).forEach((modelName) => {
-		models[modelName].init(models);
-	});
 	return { mongoose, models };
 }

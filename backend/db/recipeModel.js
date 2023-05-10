@@ -7,11 +7,11 @@ export default function (mongoose) {
 		books: [{ type: mongoose.ObjectId, ref: "Book" }],
 		images: [{ type: mongoose.ObjectId, ref: "Image" }],
 	});
-	schema.statics.init = function (models) {
-		this.models = {};
-		Object.getOwnPropertyNames((name) => {
-			this.models[name] = models[name];
-		});
+	schema.query.byUser = function (id) {
+		return this.where({ user: id });
+	};
+	schema.query.byBook = function (id) {
+		return this.where({ id: { $in: this.books } });
 	};
 	const Model = mongoose.model("Recipe", schema);
 	return Model;

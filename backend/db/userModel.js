@@ -9,12 +9,6 @@ export default function (mongoose) {
 		recipes: [{ type: mongoose.ObjectId, ref: "Recipe" }],
 		images: [{ type: mongoose.ObjectId, ref: "Image" }],
 	});
-	schema.statics.init = function (models) {
-		this.models = {};
-		Object.getOwnPropertyNames((name) => {
-			this.models[name] = models[name];
-		});
-	};
 	schema.methods.clean = function () {
 		return {
 			name: this.name,
