@@ -9,8 +9,26 @@ const emailRegex = new RegExp(
 
 const router = new Router();
 
-router.get("/", (req, res) => {
-	res.send("hello");
+router.get("/:id", async (req, res) => {
+	try {
+		//eventually include check for authenticated user, and if they are requesting themselves, give full details
+		const user = await req.db.User.findById(req.params.id);
+		if (user === null) res.status(404).end();
+		else res.status(200).json(user.clean());
+	} catch (e) {
+		console.error(e);
+		res.status(500).send("Failed to GET user");
+	}
+});
+
+router.get("/:id/recipes", async (req, res) => {
+	try {
+		const recipes = await req.db.Recipe.find({ user: req.params.id });
+		res.json(recipes);
+	} catch (e) {
+		console.error(e);
+		res.status(500).send("Failed to GET user's recipes");
+	}
 });
 
 router.post("/", async (req, res) => {
@@ -22,30 +40,32 @@ router.post("/", async (req, res) => {
 		else if (emailRegex.exec(req.body.email)[0] !== req.body.email)
 			res.status(400).send("email");
 		//check if email is already in use
-		else if (
-			(await req.db.User.findOne({ where: { email: req.body.email } })) !== null
-		)
+		else if ((await req.db.User.findOne({ email: req.body.email })) !== null)
 			res.status(409).send("email");
 		//check if username is already in use
 		else if (
-			(await req.db.User.findOne({ where: { email: req.body.username } })) !==
-			null
+			(await req.db.User.findOne({ username: req.body.username })) !== null
 		)
 			res.status(409).send("username");
 		else {
 			const password = await hash(req.body.password, SALT_ROUNDS);
-			const user = await req.db.User.create({
+			const user = new req.db.User({
 				name: req.body.name,
 				username: req.body.username,
 				email: req.body.email,
 				password,
+				subscribedBooks: [],
+				ownedBooks: [],
+				recipes: [],
+				images: [],
 			});
+			user.save();
 			//perform authentication things here
-			res.status(200).json(user.clean());
+			res.status(201).json(user.clean());
 		}
 	} catch (e) {
 		console.error(e);
-		res.status(502).send("Failed to POST user");
+		res.status(500).send("Failed to POST user");
 	}
 
 	res.end();
