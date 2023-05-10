@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 import db from "./db/db.js";
 
 //routes
-import UserRoute from "./routes/user/user.js";
+import UserRoute from "./routes/user.js";
 
 dotenv.config();
 db().then(({ mongoose, models }) => {
