@@ -1,13 +1,13 @@
 export default function (mongoose) {
 	const schema = new mongoose.Schema({
-		name: String,
-		username: String,
-		password: String,
-		email: String,
-		subscribedBooks: [mongoose.ObjectId],
-		ownedBooks: [mongoose.ObjectId],
-		recipes: [mongoose.ObjectId],
-		images: [mongoose.ObjectId],
+		name: { type: String, required: true },
+		username: { type: String, required: true },
+		password: { type: String, required: true },
+		email: { type: String, required: true },
+		subscribedBooks: [{ type: mongoose.ObjectId, ref: "Book" }],
+		ownedBooks: [{ type: mongoose.ObjectId, ref: "Book" }],
+		recipes: [{ type: mongoose.ObjectId, ref: "Recipe" }],
+		images: [{ type: mongoose.ObjectId, ref: "Image" }],
 	});
 	schema.statics.init = function (models) {
 		this.models = {};

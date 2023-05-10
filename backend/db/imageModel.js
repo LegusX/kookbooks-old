@@ -1,9 +1,9 @@
 export default function (mongoose) {
 	const schema = new mongoose.Schema({
-		size: Number,
-		user: mongoose.ObjectId,
-		recipe: mongoose.ObjectId,
-		book: mongoose.ObjectId,
+		size: { type: Number, required: true },
+		user: { type: mongoose.ObjectId, ref: "User", required: true },
+		recipe: { type: mongoose.ObjectId, ref: "User" },
+		book: { type: mongoose.ObjectId, ref: "User" },
 	});
 	schema.statics.init = function (models) {
 		this.models = {};

@@ -3,9 +3,9 @@ export default function (mongoose) {
 		name: String,
 		text: String,
 		user: mongoose.ObjectId,
-		ingredients: [mongoose.ObjectId],
-		books: [mongoose.ObjectId],
-		images: [mongoose.ObjectId],
+		ingredients: [{ type: mongoose.ObjectId, ref: "Ingredient" }],
+		books: [{ type: mongoose.ObjectId, ref: "Book" }],
+		images: [{ type: mongoose.ObjectId, ref: "Image" }],
 	});
 	schema.statics.init = function (models) {
 		this.models = {};
