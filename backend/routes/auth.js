@@ -2,7 +2,6 @@ import { Router } from "express";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import { compareSync } from "bcrypt";
-import db from "../db/db.js";
 
 passport.use(
 	new LocalStrategy(
@@ -14,7 +13,7 @@ passport.use(
 				if (compareSync(password, user.password)) {
 					callback(null, user);
 				} else {
-					return callback(404);
+					return callback(null, false);
 				}
 			});
 		}
@@ -41,7 +40,7 @@ export default function (models) {
 	router.post(
 		"/password",
 		passport.authenticate("local", {
-			successRedirect: "/",
+			successReturnToOrRedirect: "/",
 			failureRedirect: "/auth/login",
 		})
 	);
@@ -55,3 +54,5 @@ export default function (models) {
 
 	return router;
 }
+
+// export passport

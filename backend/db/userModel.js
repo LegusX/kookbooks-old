@@ -4,10 +4,6 @@ export default function (mongoose) {
 		username: { type: String, required: true },
 		password: { type: String, required: true },
 		email: { type: String, required: true },
-		subscribedBooks: [{ type: mongoose.ObjectId, ref: "Book" }],
-		ownedBooks: [{ type: mongoose.ObjectId, ref: "Book" }],
-		recipes: [{ type: mongoose.ObjectId, ref: "Recipe" }],
-		images: [{ type: mongoose.ObjectId, ref: "Image" }],
 		avatar: { type: mongoose.ObjectId, ref: "Image" },
 	});
 	schema.methods.clean = function () {
