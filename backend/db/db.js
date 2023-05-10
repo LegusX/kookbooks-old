@@ -37,5 +37,5 @@ export default async function db() {
 	Object.getOwnPropertyNames(models).forEach((modelName) => {
 		models[modelName].init(models);
 	});
-	return { mongoose, ...models };
+	return { mongoose, models };
 }
