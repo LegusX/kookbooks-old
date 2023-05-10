@@ -60,6 +60,7 @@ router.post("/", async (req, res) => {
 				recipes: [],
 				images: [],
 			});
+			user.save();
 			//perform authentication things here
 			res.status(201).json(user.clean());
 		}
