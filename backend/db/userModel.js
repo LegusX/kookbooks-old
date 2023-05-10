@@ -8,6 +8,7 @@ export default function (mongoose) {
 		ownedBooks: [{ type: mongoose.ObjectId, ref: "Book" }],
 		recipes: [{ type: mongoose.ObjectId, ref: "Recipe" }],
 		images: [{ type: mongoose.ObjectId, ref: "Image" }],
+		avatar: { type: mongoose.ObjectId, ref: "Image" },
 	});
 	schema.methods.clean = function () {
 		return {
