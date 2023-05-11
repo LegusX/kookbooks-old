@@ -33,10 +33,11 @@ router.post("/", ensureLoggedIn("/login"), async (req, res) => {
 				ingredients: req.body.ingredients,
 				books: [book._id],
 				images: [],
+				thumbnail: req.body.thumbnail,
 			});
 			recipe.save();
 			res.status(201).json(recipe.clean());
-		} else return res.status(403).end("Unauthorized");
+		} else return res.status(403).send("Unauthorized");
 	} catch (e) {
 		console.error(e);
 		res.status(500).send("Failed to POST recipe");

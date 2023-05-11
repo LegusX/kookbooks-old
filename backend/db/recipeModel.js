@@ -23,6 +23,7 @@ export default function (mongoose) {
 			directions: this.directions,
 			ingredients: this.ingredients,
 			user: this.id,
+			thumbnail: this.thumbnail,
 		};
 	};
 	const Model = mongoose.model("Recipe", schema);
