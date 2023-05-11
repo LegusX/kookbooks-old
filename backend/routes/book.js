@@ -61,4 +61,32 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
+router.put("/:book/recipe/:recipe", async (req, res) => {
+	const bookID = req.params.book;
+	const recipeID = req.params.recipeID;
+
+	try {
+		if (bookID.length !== 24) return res.status(400).end();
+		if (recipeID.length !== 24) return res.status(400).end();
+
+		const book = await req.db.Book.findById(bookID);
+		if (book === null) return res.status(404).end();
+		//ensure user is authorized to add recipes to a book
+		if (
+			book.user.equals(req.user._id) ||
+			book.editors.some((user) => user.equals(req.user._id)).length === 1
+		) {
+			const recipe = await req.db.Recipe.findById(recipeID);
+			if (recipe === null) return res.status(404).end();
+
+			recipe.books.push(book._id);
+			await recipe.save();
+			res.status(200).end();
+		}
+	} catch (e) {
+		console.error(e);
+		res.status(500).end();
+	}
+});
+
 export default router;
