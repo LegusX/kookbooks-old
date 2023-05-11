@@ -1,13 +1,24 @@
 import { useState } from "react";
-// import "./App.css";
+import {
+	createBrowserRouter,
+	createRoutesFromElements,
+	Route,
+	RouterProvider,
+} from "react-router-dom";
+
+import { IndexRoute } from "./pages/index.jsx";
+
+import "./App.css";
+
+const router = createBrowserRouter(
+	createRoutesFromElements(<Route path="/" element={<IndexRoute />}></Route>)
+);
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
-		<div data-theme="cupcake">
-			<button class="btn">Hello world</button>
-		</div>
+		<>
+			<RouterProvider router={router} />
+		</>
 	);
 }
 
