@@ -4,12 +4,14 @@ import db from "./db/db.js";
 import MongoStore from "connect-mongo";
 import session from "express-session";
 import passport from "passport";
+import { ensureLoggedIn } from "connect-ensure-login";
 
 //routes
 import UserRoute from "./routes/user.js";
 import AuthRoute from "./routes/auth.js";
 import BookRoute from "./routes/book.js";
 import RecipeRoute from "./routes/recipe.js";
+import ImageRoute from "./routes/image.js";
 
 dotenv.config();
 db().then(({ mongoose, models }) => {
@@ -44,6 +46,7 @@ db().then(({ mongoose, models }) => {
 		app.use("/book", BookRoute);
 		app.use("/recipe", RecipeRoute);
 		app.use("/auth", AuthRoute(models));
+		app.use("/image", ensureLoggedIn("/login"), ImageRoute);
 
 		app.get("/", (req, res) => {
 			res.send("Hello world");
