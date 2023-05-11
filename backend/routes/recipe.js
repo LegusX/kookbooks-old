@@ -31,6 +31,8 @@ router.post("/", ensureLoggedIn("/login"), async (req, res) => {
 				directions: req.body.directions,
 				user: req.user._id,
 				ingredients: req.body.ingredients,
+				books: [book._id],
+				images: [],
 			});
 			recipe.save();
 			res.status(201).json(recipe.clean());
@@ -38,6 +40,20 @@ router.post("/", ensureLoggedIn("/login"), async (req, res) => {
 	} catch (e) {
 		console.error(e);
 		res.status(500).send("Failed to POST recipe");
+	}
+});
+
+router.get("/:id", async (req, res) => {
+	try {
+		const id = req.params.id;
+		const recipe = await req.db.Recipe.findById(id);
+		if (recipe === null) return res.status(404).end();
+		else {
+			res.status(200).json(recipe.clean());
+		}
+	} catch (e) {
+		console.error(e);
+		res.status(500).send("Failed to GET recipe");
 	}
 });
 
