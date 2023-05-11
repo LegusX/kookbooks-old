@@ -89,4 +89,13 @@ router.put("/:book/recipe/:recipe", async (req, res) => {
 	}
 });
 
+router.get("/:id/recipes", async (req, res) => {
+	const id = req.params.id;
+	if (id.length !== 24) return res.status(400).end();
+
+	const recipes = await req.db.Recipe.find({ books: id });
+	if (recipes === null) return res.status(404).end();
+	else res.status(200).json(recipes);
+});
+
 export default router;
