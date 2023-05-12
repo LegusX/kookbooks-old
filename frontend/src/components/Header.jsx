@@ -58,7 +58,7 @@ export default function Header() {
 			</div>
 			<div className="navbar-center lg:hidden">
 				<Link to="/home">
-					<a className="btn btn-ghost normal-case text-xl">kookbooks</a>
+					<span className="btn btn-ghost normal-case text-xl">kookbooks</span>
 				</Link>
 			</div>
 			<div className="navbar-end">
