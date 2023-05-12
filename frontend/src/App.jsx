@@ -1,23 +1,25 @@
 import { useState } from "react";
-import {
-	createBrowserRouter,
-	createRoutesFromElements,
-	Route,
-	RouterProvider,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { IndexRoute } from "./pages/index.jsx";
+//routes
+import { IndexRoute } from "./routes/index.jsx";
+import LoginRoute from "./routes/login.jsx";
+
+//components
+import Header from "./components/Header.jsx";
 
 import "./App.css";
-
-const router = createBrowserRouter(
-	createRoutesFromElements(<Route path="/" element={<IndexRoute />}></Route>)
-);
 
 function App() {
 	return (
 		<>
-			<RouterProvider router={router} />
+			<BrowserRouter>
+				<Header />
+				<Routes>
+					<Route path="/" element={<IndexRoute />}></Route>
+					<Route path="/login" element={<LoginRoute />} />
+				</Routes>
+			</BrowserRouter>
 		</>
 	);
 }
