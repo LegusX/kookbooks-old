@@ -1,11 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import profileCircle from "../../public/icons/profilecircle.svg";
-import compassIcon from "../../public/icons/compass.svg";
-import heartIcon from "../../public/icons/heart.svg";
-import homeIcon from "../../public/icons/home.svg";
-
 export default function Header() {
 	const location = useLocation();
 	const loggedIn = true; //eventually pull this from parents
@@ -97,7 +92,7 @@ export default function Header() {
 						</Link> */}
 						<button className="btn btn-ghost btn-circle">
 							<div className="indicator">
-								<img src={profileCircle} />
+								<img src="/icons/profilecircle.svg" />
 							</div>
 						</button>
 					</>

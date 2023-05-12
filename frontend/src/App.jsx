@@ -12,7 +12,7 @@ import "./App.css";
 
 function App() {
 	return (
-		<>
+		<div className="min-h-screen bg-base-200">
 			<BrowserRouter>
 				<Header />
 				<Routes>
@@ -20,7 +20,7 @@ function App() {
 					<Route path="/login" element={<LoginRoute />} />
 				</Routes>
 			</BrowserRouter>
-		</>
+		</div>
 	);
 }
 
