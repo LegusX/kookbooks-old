@@ -7,6 +7,8 @@ import { logout } from "../shared/_api";
 export default function Header() {
 	const location = useLocation();
 	const { user, setUser } = useContext(UserContext);
+	const [logoutOpen, setLogout] = useState(false);
+	const navigate = useNavigate();
 
 	const loggedIn = user !== null;
 	return (
@@ -36,26 +38,26 @@ export default function Header() {
 						>
 							<li>
 								<Link to="/home">
-									<img src="/icons/heart.svg" />
+									<img src="/icons/home.svg" />
 									Home
 								</Link>
 							</li>
 							<li>
 								<Link to="/books">
 									<img src="/icons/book.svg" />
-									My Kookbooks
+									My kookbooks
 								</Link>
 							</li>
 							{/* Probably to be added in phase 2 */}
 							{/* <li>
-								<Link to="/discover">
-									<img src="/icons/compass.svg" />
-									Discover
-								</Link>
-							</li> */}
+							<Link to="/discover">
+								<img src="/icons/compass.svg" />
+								Discover
+							</Link>
+						</li> */}
 							{/* <li>
-								<Link to="/favorites">Favorites</Link>
-							</li> */}
+							<Link to="/favorites">Favorites</Link>
+						</li> */}
 						</ul>
 					</div>
 					<a className="btn btn-ghost normal-case text-xl hidden lg:flex">
@@ -80,29 +82,75 @@ export default function Header() {
 							</Link>
 							<Link to="/books">
 								<button className="btn btn-ghost hidden lg:flex">
-									My Kookbooks
+									My kookbooks
 								</button>
 							</Link>
 							{/* To be added in phase 2 */}
 							{/* <Link to="/discover">
-								<button className="btn btn-ghost btn-circle sm:hidden">
-									Discover
-								</button>
-							</Link> */}
-							{/* <Link to="/favorites">
-								<button className="btn btn-ghost btn-circle sm:hidden">
-									Favorites
-								</button>
-							</Link> */}
-							<button className="btn btn-ghost btn-circle">
-								<div className="indicator">
-									<img src="/icons/profilecircle.svg" />
-								</div>
+							<button className="btn btn-ghost btn-circle sm:hidden">
+								Discover
 							</button>
+						</Link> */}
+							{/* <Link to="/favorites">
+							<button className="btn btn-ghost btn-circle sm:hidden">
+								Favorites
+							</button>
+						</Link> */}
+							<div className="dropdown dropdown-end">
+								<label className="btn btn-ghost btn-circle" tabIndex={0}>
+									<img src="/icons/profilecircle.svg" />
+								</label>
+								<ul
+									className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-40"
+									tabIndex={0}
+								>
+									<li>
+										<Link to="/profile" className="justify-end">
+											Profile
+											<img src="/icons/profilecircle.svg" />
+										</Link>
+									</li>
+									<li>
+										<Link to="/settings" className="justify-end">
+											Settings
+											<img src="/icons/settings.svg" />
+										</Link>
+									</li>
+									<div className="divider m-0"></div>
+									<li>
+										<Link
+											className="justify-end"
+											onClick={() => setLogout(true)}
+										>
+											Log Out
+											<img src="/icons/log-out.svg" />
+										</Link>
+									</li>
+								</ul>
+							</div>
 						</>
 					)}
 				</div>
 			</div>
+			<Modal
+				id="logoutModal"
+				title="Are you sure you want to log out?"
+				primaryButton={{
+					text: "Continue",
+					callback: () => {
+						setLogout(false);
+						logout(setUser);
+						navigate("/");
+					},
+				}}
+				secondaryButton={{
+					text: "Cancel",
+					callback: () => {
+						setLogout(false);
+					},
+				}}
+				open={logoutOpen}
+			/>
 		</>
 	);
 }

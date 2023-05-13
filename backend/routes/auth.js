@@ -48,7 +48,7 @@ export default function (models) {
 	router.post("/logout", (req, res, next) => {
 		req.logout((err) => {
 			if (err) return next(err);
-			res.redirect("/");
+			res.status(200).end();
 		});
 	});
 

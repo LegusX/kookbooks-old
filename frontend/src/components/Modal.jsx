@@ -6,7 +6,6 @@ title="Are you sure you want to log out?"
 primaryButton={{
 	text: "Continue",
 	callback: () => {
-		console.log("continue");
 		setLogout(false);
 		logout(setUser);
 		navigate("/");
