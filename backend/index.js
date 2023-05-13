@@ -5,6 +5,9 @@ import MongoStore from "connect-mongo";
 import session from "express-session";
 import passport from "passport";
 import { ensureLoggedIn } from "connect-ensure-login";
+import cors from "cors";
+
+dotenv.config();
 
 //routes
 import UserRoute from "./routes/user.js";
@@ -13,12 +16,13 @@ import BookRoute from "./routes/book.js";
 import RecipeRoute from "./routes/recipe.js";
 import ImageRoute from "./routes/image.js";
 
-dotenv.config();
 db().then(({ mongoose, models }) => {
 	try {
 		//setup authentication
 
 		const app = express();
+
+		app.use(cors());
 
 		app.use((req, res, next) => {
 			req.db = { mongoose, ...models };
@@ -35,6 +39,11 @@ db().then(({ mongoose, models }) => {
 					touchAfter: 24 * 3600, //only update session once per 24 hours
 					ttl: 60 * 60 * 24 * 30, //session lasts for a month
 				}),
+				cookie: {
+					sameSite: "strict",
+					// secure: true,
+					// httpOnly: process.env.NODE_ENV === "development",
+				},
 			})
 		);
 

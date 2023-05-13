@@ -1,9 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../App";
 
 export default function Header() {
 	const location = useLocation();
-	const loggedIn = true; //eventually pull this from parents
+	const { user } = useContext(UserContext);
+
+	const loggedIn = user !== null; //eventually pull this from parents
 	return (
 		<div className="navbar bg-base-100">
 			<div className="navbar-start">
@@ -62,20 +65,18 @@ export default function Header() {
 				</Link>
 			</div>
 			<div className="navbar-end">
-				{loggedIn && (
+				{!loggedIn && (
 					<Link to="/login">
 						<button className="btn btn-ghost">Sign In</button>
 					</Link>
 				)}
-				{!loggedIn && (
+				{loggedIn && (
 					<>
 						<Link to="/home">
-							<button className="btn btn-ghost btn-circle sm:hidden">
-								Home
-							</button>
+							<button className="btn btn-ghost hidden lg:block">Home</button>
 						</Link>
 						<Link to="/books">
-							<button className="btn btn-ghost btn-circle sm:hidden">
+							<button className="btn btn-ghost hidden lg:flex">
 								My Kookbooks
 							</button>
 						</Link>

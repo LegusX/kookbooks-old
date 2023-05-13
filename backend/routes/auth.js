@@ -8,7 +8,7 @@ passport.use(
 		{ passReqToCallback: true },
 		(req, username, password, callback) => {
 			req.db.User.findOne({ username: username }).then((user) => {
-				if (user === null) return callback(403);
+				if (user === null) return callback(null, false);
 
 				if (compareSync(password, user.password)) {
 					callback(null, user);
@@ -40,8 +40,8 @@ export default function (models) {
 	router.post(
 		"/password",
 		passport.authenticate("local", {
-			successReturnToOrRedirect: "/",
-			failureRedirect: "/auth/login",
+			successReturnToOrRedirect: "/api",
+			failureRedirect: "/asdf",
 		})
 	);
 
@@ -52,7 +52,14 @@ export default function (models) {
 		});
 	});
 
+	router.get("/self", (req, res) => {
+		if (req.user)
+			res.status(200).json({
+				username: req.user.username,
+				id: req.user.id,
+			});
+		else res.status(200).json(null);
+	});
+
 	return router;
 }
-
-// export passport

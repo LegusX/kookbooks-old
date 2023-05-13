@@ -1,13 +1,16 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { signin } from "../shared/_api";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
 
 export default function LoginRoute() {
 	const usernameInput = useRef();
 	const passwordInput = useRef();
 	const [errorText, setErrorText] = useState("");
 	const navigate = useNavigate();
+	const { setUser } = useContext(UserContext);
+
 	var formError = false;
 	var errorMessage = "";
 
@@ -25,9 +28,10 @@ export default function LoginRoute() {
 
 		if (formError) return; //if there were any errors thus far, don't bother making a request
 
-		const status = await signin(username, password);
+		const status = await signin(username, password, setUser);
 
 		// if (status.id)
+		if (status === false) return console.log("false");
 
 		if (formError) return; //Authentication failed, don't navigate away
 		navigate("/home");
