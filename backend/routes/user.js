@@ -21,6 +21,8 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
+//TODO: Authenticate both requests so that you can only see your own books and recipes
+
 //get all recipes written by user
 router.get("/:id/recipes", async (req, res) => {
 	try {

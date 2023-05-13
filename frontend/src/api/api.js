@@ -1,4 +1,5 @@
 import { signin, getSelf, logout } from "./auth";
+import { getBooksByUser } from "./books";
 
 export const auth = {
 	signin,
@@ -6,4 +7,6 @@ export const auth = {
 	logout,
 };
 
-export const books = {};
+export const books = {
+	getBooksByUser,
+};
