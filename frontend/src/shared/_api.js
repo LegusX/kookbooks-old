@@ -27,3 +27,9 @@ export async function signin(username, password, setUser) {
 export async function getSelf() {
 	return await axios.get("/auth/self");
 }
+
+export async function logout(setUser) {
+	await axios.post("/auth/logout");
+	setUser(null);
+	return;
+}
