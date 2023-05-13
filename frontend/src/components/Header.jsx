@@ -33,14 +33,14 @@ export default function Header() {
 					>
 						<li>
 							<Link to="/home">
-								<img src="/icons/heart.svg" />
+								<img src="/icons/home.svg" />
 								Home
 							</Link>
 						</li>
 						<li>
 							<Link to="/books">
 								<img src="/icons/book.svg" />
-								My Kookbooks
+								My kookbooks
 							</Link>
 						</li>
 						{/* Probably to be added in phase 2 */}
@@ -77,7 +77,7 @@ export default function Header() {
 						</Link>
 						<Link to="/books">
 							<button className="btn btn-ghost hidden lg:flex">
-								My Kookbooks
+								My kookbooks
 							</button>
 						</Link>
 						{/* To be added in phase 2 */}
@@ -91,11 +91,38 @@ export default function Header() {
 								Favorites
 							</button>
 						</Link> */}
-						<button className="btn btn-ghost btn-circle">
-							<div className="indicator">
+						<div className="dropdown dropdown-end">
+							<label className="btn btn-ghost btn-circle" tabIndex={0}>
 								<img src="/icons/profilecircle.svg" />
-							</div>
-						</button>
+							</label>
+							<ul
+								className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-40"
+								tabIndex={0}
+							>
+								<li>
+									<Link className="justify-end">
+										Profile
+										<img src="/icons/profilecircle.svg" />
+									</Link>
+								</li>
+								<li>
+									<Link className="justify-end">
+										Settings
+										<img src="/icons/settings.svg" />
+									</Link>
+								</li>
+								<div className="divider m-0"></div>
+								<li>
+									<Link className="justify-end">
+										Log Out
+										<img src="/icons/log-out.svg" />
+									</Link>
+								</li>
+							</ul>
+						</div>
+						{/* <button className="btn btn-ghost btn-circle">
+							<img src="/icons/profilecircle.svg" />
+						</button> */}
 					</>
 				)}
 			</div>
