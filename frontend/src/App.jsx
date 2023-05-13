@@ -1,5 +1,7 @@
-import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
+
+export const UserContext = createContext({});
 
 //routes
 import { IndexRoute } from "./routes/index.jsx";
@@ -9,18 +11,29 @@ import LoginRoute from "./routes/login.jsx";
 import Header from "./components/Header.jsx";
 
 import "./App.css";
+import { getSelf } from "./shared/_api.js";
 
 function App() {
+	const [user, setUser] = useState(null);
+
+	useEffect(() => {
+		getSelf().then((self) => {
+			setUser(self.data);
+		});
+	}, []);
+
 	return (
-		<>
-			<BrowserRouter>
-				<Header />
-				<Routes>
-					<Route path="/" element={<IndexRoute />}></Route>
-					<Route path="/login" element={<LoginRoute />} />
-				</Routes>
-			</BrowserRouter>
-		</>
+		<UserContext.Provider value={{ user: user, setUser: setUser }}>
+			<div className="min-h-screen bg-base-200">
+				<BrowserRouter>
+					<Header />
+					<Routes>
+						<Route path="/" element={<IndexRoute />}></Route>
+						<Route path="/login" element={<LoginRoute />} />
+					</Routes>
+				</BrowserRouter>
+			</div>
+		</UserContext.Provider>
 	);
 }
 
