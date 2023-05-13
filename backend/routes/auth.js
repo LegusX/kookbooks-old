@@ -48,8 +48,12 @@ export default function (models) {
 	router.post("/logout", (req, res, next) => {
 		req.logout((err) => {
 			if (err) return next(err);
-			res.status(200).end();
+			res.json(null);
 		});
+	});
+
+	router.get("/logout", (req, res) => {
+		res.json(null);
 	});
 
 	router.get("/self", (req, res) => {

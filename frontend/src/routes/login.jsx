@@ -9,7 +9,7 @@ export default function LoginRoute() {
 	const passwordInput = useRef();
 	const [errorText, setErrorText] = useState("");
 	const navigate = useNavigate();
-	const { setUser } = useContext(UserContext);
+	const { user, setUser } = useContext(UserContext);
 
 	var formError = false;
 	var errorMessage = "";

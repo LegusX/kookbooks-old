@@ -29,7 +29,8 @@ export async function getSelf() {
 }
 
 export async function logout(setUser) {
-	await axios.post("/auth/logout");
+	const res = await axios.post("/auth/logout");
+	if (res.status !== 200) return console.error("Failed to log out!");
 	setUser(null);
 	return;
 }

@@ -27,7 +27,6 @@ export default function Modal({
 	secondaryButton, //object containing properties text, and callback function, for when button has been clicked
 	open,
 }) {
-	console.log(open);
 	return (
 		<>
 			<div
