@@ -1,12 +1,14 @@
-import { Link, useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { UserContext } from "../App";
+import Modal from "./Modal";
+import { logout } from "../shared/_api";
 
 export default function Header() {
 	const location = useLocation();
-	const { user } = useContext(UserContext);
+	const { user, setUser } = useContext(UserContext);
 
-	const loggedIn = user !== null; //eventually pull this from parents
+	const loggedIn = user !== null;
 	return (
 		<div className="navbar bg-base-100">
 			<div className="navbar-start">
@@ -100,20 +102,20 @@ export default function Header() {
 								tabIndex={0}
 							>
 								<li>
-									<Link className="justify-end">
+									<Link to="/profile" className="justify-end">
 										Profile
 										<img src="/icons/profilecircle.svg" />
 									</Link>
 								</li>
 								<li>
-									<Link className="justify-end">
+									<Link to="/settings" className="justify-end">
 										Settings
 										<img src="/icons/settings.svg" />
 									</Link>
 								</li>
 								<div className="divider m-0"></div>
 								<li>
-									<Link className="justify-end">
+									<Link className="justify-end" onClick={() => alert("hi")}>
 										Log Out
 										<img src="/icons/log-out.svg" />
 									</Link>
