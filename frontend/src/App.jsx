@@ -11,13 +11,13 @@ import LoginRoute from "./routes/login.jsx";
 import Header from "./components/Header.jsx";
 
 import "./App.css";
-import { getSelf } from "./shared/_api.js";
+import { auth } from "./api/api.js";
 
 function App() {
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
-		getSelf().then((self) => {
+		auth.getSelf().then((self) => {
 			setUser(self.data);
 		});
 	}, []);

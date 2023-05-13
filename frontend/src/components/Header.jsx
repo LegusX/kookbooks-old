@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
 import Modal from "./Modal";
-import { logout } from "../shared/_api";
+import { auth } from "../api/api";
 
 export default function Header() {
 	const location = useLocation();
@@ -139,7 +139,7 @@ export default function Header() {
 					text: "Continue",
 					callback: () => {
 						setLogout(false);
-						logout(setUser);
+						auth.logout(setUser);
 						navigate("/");
 					},
 				}}
