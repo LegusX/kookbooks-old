@@ -21,6 +21,7 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
+//get all recipes written by user
 router.get("/:id/recipes", async (req, res) => {
 	try {
 		const recipes = await req.db.Recipe.find({ user: req.params.id });
@@ -31,6 +32,7 @@ router.get("/:id/recipes", async (req, res) => {
 	}
 });
 
+//get all books subscribed to by user
 router.get("/:id/books", async (req, res) => {
 	try {
 		const books = await req.db.Book.find({ subscibers: req.params.id });
