@@ -68,3 +68,14 @@ db().then(({ mongoose, models }) => {
 		console.error(e);
 	}
 });
+
+//an attempt to make nodemon actually kill the process after a crash
+
+process.once("SIGUSR2", function () {
+	process.kill(process.pid, "SIGUSR2");
+});
+
+process.on("SIGINT", function () {
+	// this is only called on ctrl+c, not restart
+	process.kill(process.pid, "SIGINT");
+});

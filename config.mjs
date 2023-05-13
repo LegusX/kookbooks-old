@@ -4,7 +4,7 @@ const config = {
 		serverPort: "80",
 	},
 	development: {
-		serverPort: 3001,
+		serverPort: 3000,
 		serverAddress: "",
 	},
 	api: "/api",
