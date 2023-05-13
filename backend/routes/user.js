@@ -31,6 +31,16 @@ router.get("/:id/recipes", async (req, res) => {
 	}
 });
 
+router.get("/:id/books", async (req, res) => {
+	try {
+		const books = await req.db.Book.find({ subscibers: req.params.id });
+		res.json(books);
+	} catch (e) {
+		console.error(e);
+		res.status(500).send("Failed to GET user's subscribed booksa");
+	}
+});
+
 router.post("/", async (req, res) => {
 	try {
 		//new user validation
