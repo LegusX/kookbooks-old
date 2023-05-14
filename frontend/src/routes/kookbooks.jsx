@@ -20,10 +20,14 @@ export default function KookbooksRoute() {
 
 	if (books === null)
 		return (
-			<div className="radial-progress animate-spin" style={{ "--value": 70 }} />
+			<div className="flex min-w-full min-h-full justify-center items-center">
+				<div
+					className="radial-progress animate-spin"
+					style={{ "--value": 70 }}
+				/>
+			</div>
 		);
 	const bookElements = books.map((book) => {
-		console.log(book);
 		if (book.name.toLowerCase().includes(query.toLowerCase()))
 			return <Kookbook book={book} key={book.id} />;
 	});
@@ -31,7 +35,6 @@ export default function KookbooksRoute() {
 	// TODO: Replace drawer with a floating search box instead, likely at the bottom of the screen? Can't really think of any reason to filter the subscribed kookbooks
 	return (
 		<>
-			{" "}
 			<div className="drawer drawer-mobile bg-base-100">
 				<input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 				<div className="drawer-content rounded-tl-sm bg-base-200">
