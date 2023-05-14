@@ -6,6 +6,7 @@ import Kookbook from "../components/kookbook";
 export default function KookbooksRoute() {
 	const { user } = useContext(UserContext);
 	const [books, setBooks] = useState(null);
+	const [query, setQuery] = useState("");
 
 	useEffect(() => {
 		if (user === null) return;
@@ -18,9 +19,13 @@ export default function KookbooksRoute() {
 		return (
 			<div className="radial-progress animate-spin" style={{ "--value": 70 }} />
 		);
-	const bookElements = books.map((book) => (
-		<Kookbook book={book} key={book.id} />
-	));
+	const bookElements = books.map((book) => {
+		console.log(book);
+		if (book.name.toLowerCase().includes(query.toLowerCase()))
+			return <Kookbook book={book} key={book.id} />;
+	});
+
+	// TODO: Replace drawer with a floating search box instead, likely at the bottom of the screen? Can't really think of any reason to filter the subscribed kookbooks
 	return (
 		<div className="drawer drawer-mobile bg-base-100">
 			<input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -31,17 +36,26 @@ export default function KookbooksRoute() {
 			</div>
 			<div className="drawer-side">
 				<label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-				<ul className="menu p-4 w-80 bg-base-100 text-base-content">
+				{/* <ul className="menu p-4 w-80 bg-base-100 text-base-content">
 					<li>
 						<a>Sidebar Item 1</a>
 					</li>
 					<li>
 						<a>Sidebar Item 2</a>
 					</li>
-				</ul>
+				</ul> */}
+				<div className="p-4 flex flex-col gap-4">
+					<input
+						type="text"
+						className="input input-sm input-bordered"
+						placeholder="Search kookbooks..."
+						onChange={(e) => {
+							console.log(e);
+							setQuery(e.target.value);
+						}}
+					></input>
+				</div>
 			</div>
 		</div>
 	);
 }
-
-// <div className="flex gap-4 flex-wrap m-4 justify-start">{bookElements}</div>
