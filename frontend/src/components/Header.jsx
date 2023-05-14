@@ -135,7 +135,7 @@ export default function Header() {
 			<Modal
 				id="logoutModal"
 				title="Are you sure you want to log out?"
-				primaryButton={{
+				secondaryButton={{
 					text: "Continue",
 					callback: () => {
 						setLogout(false);
@@ -143,7 +143,7 @@ export default function Header() {
 						navigate("/");
 					},
 				}}
-				secondaryButton={{
+				primaryButton={{
 					text: "Cancel",
 					callback: () => {
 						setLogout(false);

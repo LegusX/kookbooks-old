@@ -53,7 +53,7 @@ export default function KookbooksRoute() {
 						className="btn btn-secondary"
 						onClick={() => navigate("/books/new")}
 					>
-						New Cookbook
+						New Kookbook
 					</button>
 				</div>
 			</div>
