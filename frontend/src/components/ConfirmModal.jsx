@@ -19,7 +19,7 @@ open={logoutOpen}
 /> */
 }
 
-export default function Modal({
+export default function ConfirmModal({
 	id, //to be used in the htmlFor attribute
 	title, //bolded text at top
 	description, //regular text

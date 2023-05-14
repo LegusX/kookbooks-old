@@ -1,8 +1,8 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
-import Modal from "./Modal";
 import { auth } from "../api/api";
+import ConfirmModal from "./ConfirmModal";
 
 export default function Header() {
 	const location = useLocation();
@@ -132,7 +132,7 @@ export default function Header() {
 					)}
 				</div>
 			</div>
-			<Modal
+			<ConfirmModal
 				id="logoutModal"
 				title="Are you sure you want to log out?"
 				secondaryButton={{
