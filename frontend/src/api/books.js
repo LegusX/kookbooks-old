@@ -24,6 +24,4 @@ export async function createBook(book) {
 		console.error("Failed to create kookbook!");
 		return null;
 	}
-
-	return null;
 }

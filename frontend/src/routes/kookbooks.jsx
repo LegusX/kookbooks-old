@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../App";
 import { getBooksByUser } from "../api/books";
-import Kookbook from "../components/kookbook";
+import Kookbook from "../components/Kookbook";
 import { useNavigate } from "react-router-dom";
 import CreateBookModal from "../components/CreateBookModal";
 
