@@ -13,9 +13,9 @@ export default function Header() {
 	const loggedIn = user !== null;
 	return (
 		<>
-			<div className="navbar bg-base-100">
+			<div className="navbar bg-base-100 rounded-b-xl">
 				<div className="navbar-start">
-					<div className="dropdown lg:hidden">
+					<div className="dropdown md:hidden">
 						<label tabIndex={0} className="btn btn-ghost btn-circle">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -60,11 +60,11 @@ export default function Header() {
 						</li> */}
 						</ul>
 					</div>
-					<a className="btn btn-ghost normal-case text-xl hidden lg:flex">
+					<a className="btn btn-ghost normal-case text-xl hidden md:flex">
 						kookbooks
 					</a>
 				</div>
-				<div className="navbar-center lg:hidden">
+				<div className="navbar-center md:hidden">
 					<Link to="/home">
 						<span className="btn btn-ghost normal-case text-xl">kookbooks</span>
 					</Link>
@@ -78,10 +78,10 @@ export default function Header() {
 					{loggedIn && (
 						<>
 							<Link to="/home">
-								<button className="btn btn-ghost hidden lg:block">Home</button>
+								<button className="btn btn-ghost hidden md:block">Home</button>
 							</Link>
 							<Link to="/books">
-								<button className="btn btn-ghost hidden lg:flex">
+								<button className="btn btn-ghost hidden md:flex">
 									My kookbooks
 								</button>
 							</Link>

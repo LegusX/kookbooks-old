@@ -8,6 +8,5 @@ axios.defaults.baseURL =
 
 export async function getBooksByUser(id) {
 	const books = await axios.get(`/user/${id}/books`);
-	console.log(books.data);
 	return books.data;
 }

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../App";
 import { getBooksByUser } from "../api/books";
+import Kookbook from "../components/kookbook";
 
 export default function KookbooksRoute() {
 	const { user } = useContext(UserContext);
@@ -12,5 +13,15 @@ export default function KookbooksRoute() {
 			setBooks(data);
 		});
 	}, [user]);
-	return <p>{books}</p>;
+
+	if (books === null)
+		return (
+			<div className="radial-progress animate-spin" style={{ "--value": 70 }} />
+		);
+	const bookElements = books.map((book) => (
+		<Kookbook book={book} key={book.id} />
+	));
+	return (
+		<div className="flex gap-4 flex-wrap m-4 justify-start">{bookElements}</div>
+	);
 }

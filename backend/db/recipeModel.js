@@ -18,6 +18,7 @@ export default function (mongoose) {
 	};
 	schema.methods.clean = function () {
 		return {
+			id: this.id,
 			name: this.name,
 			description: this.description,
 			directions: this.directions,

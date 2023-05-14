@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { hash } from "bcrypt";
+import mongoose from "mongoose";
 
 const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS);
 
@@ -27,7 +28,7 @@ router.get("/:id", async (req, res) => {
 router.get("/:id/recipes", async (req, res) => {
 	try {
 		const recipes = await req.db.Recipe.find({ user: req.params.id });
-		res.json(recipes);
+		res.json(recipes.map((recipe) => recipe.clean()));
 	} catch (e) {
 		console.error(e);
 		res.status(500).send("Failed to GET user's recipes");
@@ -37,8 +38,10 @@ router.get("/:id/recipes", async (req, res) => {
 //get all books subscribed to by user
 router.get("/:id/books", async (req, res) => {
 	try {
-		const books = await req.db.Book.find({ subscibers: req.params.id });
-		res.json(books);
+		const books = await req.db.Book.find({
+			subscribers: req.params.id,
+		});
+		res.json(books.map((book) => book.clean()));
 	} catch (e) {
 		console.error(e);
 		res.status(500).send("Failed to GET user's subscribed booksa");
