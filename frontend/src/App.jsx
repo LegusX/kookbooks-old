@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 
+//Contexts
+import { ToastContext, ToastComponent, notify } from "./components/toast.jsx";
 export const UserContext = createContext({});
 
 //routes
@@ -25,16 +27,19 @@ function App() {
 
 	return (
 		<UserContext.Provider value={{ user: user, setUser: setUser }}>
-			<div className="min-h-screen bg-base-200">
-				<BrowserRouter>
-					<Header />
-					<Routes>
-						<Route path="/" element={<IndexRoute />}></Route>
-						<Route path="/login" element={<LoginRoute />} />
-						<Route path="/books" element={<KookbooksRoute />} />
-					</Routes>
-				</BrowserRouter>
-			</div>
+			<ToastContext.Provider value={notify}>
+				<div className="min-h-screen bg-base-200">
+					<BrowserRouter>
+						<Header />
+						<Routes>
+							<Route path="/" element={<IndexRoute />}></Route>
+							<Route path="/login" element={<LoginRoute />} />
+							<Route path="/books" element={<KookbooksRoute />} />
+						</Routes>
+					</BrowserRouter>
+					<ToastComponent />
+				</div>
+			</ToastContext.Provider>
 		</UserContext.Provider>
 	);
 }

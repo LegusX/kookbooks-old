@@ -61,7 +61,7 @@ export default function KookbooksRoute() {
 					</div>
 				</div>
 			</div>
-			<CreateBookModal open={modalOpen} />
+			<CreateBookModal open={modalOpen} setOpen={setModalOpen} />
 		</>
 	);
 }

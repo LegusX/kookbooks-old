@@ -10,3 +10,7 @@ export async function getBooksByUser(id) {
 	const books = await axios.get(`/user/${id}/books`);
 	return books.data;
 }
+
+export async function createBook(book) {
+	return null;
+}
