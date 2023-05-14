@@ -2,27 +2,30 @@ import { useContext, useRef } from "react";
 import { UserContext } from "../App";
 import { createBook } from "../api/books";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateBookModal({ open, setOpen }) {
 	const { user } = useContext(UserContext);
+	const navigate = useNavigate();
 	// const notify = useContext(ToastContext);
 	const input = useRef();
 	const textarea = useRef();
 
 	const submit = async () => {
-		toast.success("Hello world");
 		//form validation
 		input.current.classList.remove("border-error");
-		if (input.length < 3) return input.current.classList.add("border-error");
+		if (input.current.value.length < 3)
+			return input.current.classList.add("border-error");
 		else {
-			const id = createBook({
+			const id = await createBook({
 				name: input.current.value,
 				description: textarea.current.value,
 			});
-			// if (id === null) notify("Failed to create kookbook!", "error");
-			// else {
-			// 	notify("Kookbook successfully created!", "success");
-			// }
+			if (id === null) toast.error("Failed to create kookbook!");
+			else {
+				toast.success("Kookbook successfully created!");
+				navigate("/books/" + id);
+			}
 		}
 	};
 
@@ -45,6 +48,7 @@ export default function CreateBookModal({ open, setOpen }) {
 				<div className="form-control flex-grow">
 					<label className="label">
 						<span className="label-text">Kookbook Description</span>
+						<span className="label-text text-xs">(optional)</span>
 					</label>
 					<textarea
 						type="textarea"
