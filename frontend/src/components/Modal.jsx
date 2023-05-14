@@ -44,7 +44,7 @@ export default function Modal({
 							<label
 								htmlFor={id}
 								className={
-									secondaryButton ? "btn btn-outline btn-primary" : "btn"
+									secondaryButton ? "btn btn-primary btn-outline" : "btn"
 								}
 								onClick={() => primaryButton.callback()}
 							>
@@ -54,7 +54,7 @@ export default function Modal({
 						{secondaryButton && (
 							<label
 								htmlFor={id}
-								className="btn btn-outline btn-secondary"
+								className="btn btn-error btn-outline"
 								onClick={() => secondaryButton.callback()}
 							>
 								{secondaryButton.text}

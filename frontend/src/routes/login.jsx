@@ -1,6 +1,6 @@
 import { useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { signin } from "../shared/_api";
+import { auth } from "../api/api";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 
@@ -28,7 +28,7 @@ export default function LoginRoute() {
 
 		if (formError) return; //if there were any errors thus far, don't bother making a request
 
-		const status = await signin(username, password, setUser);
+		const status = await auth.signin(username, password, setUser);
 
 		// if (status.id)
 		if (status === false) return console.log("false");

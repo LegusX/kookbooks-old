@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
 import Modal from "./Modal";
-import { logout } from "../shared/_api";
+import { auth } from "../api/api";
 
 export default function Header() {
 	const location = useLocation();
@@ -15,7 +15,7 @@ export default function Header() {
 		<>
 			<div className="navbar bg-base-100">
 				<div className="navbar-start">
-					<div className="dropdown lg:hidden">
+					<div className="dropdown md:hidden">
 						<label tabIndex={0} className="btn btn-ghost btn-circle">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -60,11 +60,11 @@ export default function Header() {
 						</li> */}
 						</ul>
 					</div>
-					<a className="btn btn-ghost normal-case text-xl hidden lg:flex">
+					<a className="btn btn-ghost normal-case text-xl hidden md:flex">
 						kookbooks
 					</a>
 				</div>
-				<div className="navbar-center lg:hidden">
+				<div className="navbar-center md:hidden">
 					<Link to="/home">
 						<span className="btn btn-ghost normal-case text-xl">kookbooks</span>
 					</Link>
@@ -78,10 +78,10 @@ export default function Header() {
 					{loggedIn && (
 						<>
 							<Link to="/home">
-								<button className="btn btn-ghost hidden lg:block">Home</button>
+								<button className="btn btn-ghost hidden md:block">Home</button>
 							</Link>
 							<Link to="/books">
-								<button className="btn btn-ghost hidden lg:flex">
+								<button className="btn btn-ghost hidden md:flex">
 									My kookbooks
 								</button>
 							</Link>
@@ -135,15 +135,15 @@ export default function Header() {
 			<Modal
 				id="logoutModal"
 				title="Are you sure you want to log out?"
-				primaryButton={{
+				secondaryButton={{
 					text: "Continue",
 					callback: () => {
 						setLogout(false);
-						logout(setUser);
+						auth.logout(setUser);
 						navigate("/");
 					},
 				}}
-				secondaryButton={{
+				primaryButton={{
 					text: "Cancel",
 					callback: () => {
 						setLogout(false);
