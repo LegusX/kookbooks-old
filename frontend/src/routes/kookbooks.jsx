@@ -2,8 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../App";
 import { getBooksByUser } from "../api/books";
 import Kookbook from "../components/kookbook";
+import { useNavigate } from "react-router-dom";
 
 export default function KookbooksRoute() {
+	const navigate = useNavigate();
 	const { user } = useContext(UserContext);
 	const [books, setBooks] = useState(null);
 	const [query, setQuery] = useState("");
@@ -36,14 +38,6 @@ export default function KookbooksRoute() {
 			</div>
 			<div className="drawer-side">
 				<label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-				{/* <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-					<li>
-						<a>Sidebar Item 1</a>
-					</li>
-					<li>
-						<a>Sidebar Item 2</a>
-					</li>
-				</ul> */}
 				<div className="p-4 flex flex-col gap-4">
 					<input
 						type="text"
@@ -54,6 +48,13 @@ export default function KookbooksRoute() {
 							setQuery(e.target.value);
 						}}
 					></input>
+					<div className="divider m-0" />
+					<button
+						className="btn btn-secondary"
+						onClick={() => navigate("/books/new")}
+					>
+						New Cookbook
+					</button>
 				</div>
 			</div>
 		</div>
