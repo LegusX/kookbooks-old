@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 
+//Contexts
+import { ToastComponent } from "./components/toast.jsx";
 export const UserContext = createContext({});
 
 //routes
@@ -34,6 +36,7 @@ function App() {
 						<Route path="/books" element={<KookbooksRoute />} />
 					</Routes>
 				</BrowserRouter>
+				<ToastComponent />
 			</div>
 		</UserContext.Provider>
 	);
