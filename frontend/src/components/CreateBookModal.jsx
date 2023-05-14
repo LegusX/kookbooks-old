@@ -1,13 +1,16 @@
 import { useContext, useRef } from "react";
 import { UserContext } from "../App";
 import { createBook } from "../api/books";
+import { toast } from "react-toastify";
 
 export default function CreateBookModal({ open, setOpen }) {
 	const { user } = useContext(UserContext);
+	// const notify = useContext(ToastContext);
 	const input = useRef();
 	const textarea = useRef();
 
 	const submit = async () => {
+		toast.success("Hello world");
 		//form validation
 		input.current.classList.remove("border-error");
 		if (input.length < 3) return input.current.classList.add("border-error");
@@ -16,7 +19,10 @@ export default function CreateBookModal({ open, setOpen }) {
 				name: input.current.value,
 				description: textarea.current.value,
 			});
-			// if ()
+			// if (id === null) notify("Failed to create kookbook!", "error");
+			// else {
+			// 	notify("Kookbook successfully created!", "success");
+			// }
 		}
 	};
 
