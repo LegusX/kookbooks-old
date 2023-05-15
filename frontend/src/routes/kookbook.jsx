@@ -22,13 +22,13 @@ export default function KookbookRoute() {
 				/>
 			</div>
 		);
-	console.log(recipes);
 	const recipeComponents = recipes.map((recipe) => {
-		return <RecipeComponent recipe={recipe} />;
+		console.log(recipe.id);
+		return <RecipeComponent recipe={recipe} key={recipe.id} />;
 	});
 	return (
 		<>
-			<div className="drawer drawer-mobile bg-base-100">
+			<div className="drawer drawer-mobile bg-base-100 h-100">
 				<input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 				<div className="drawer-content rounded-tl-sm bg-base-200">
 					<div className="grid grid-flow-row gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-4">
