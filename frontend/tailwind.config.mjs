@@ -1,12 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-import daisyui from "daisyui";
 
-export default {
+module.exports = {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		extend: {},
 	},
-	plugins: [daisyui],
+	plugins: [require("@tailwindcss/typography"), require("daisyui")],
 	daisyui: {
 		themes: ["cupcake"],
 	},
