@@ -57,6 +57,7 @@ export default function (models) {
 	});
 
 	router.get("/self", (req, res) => {
+		console.log(req.user);
 		if (req.user)
 			res.status(200).json({
 				name: req.user.name,

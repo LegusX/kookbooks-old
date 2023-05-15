@@ -29,6 +29,8 @@ db().then(({ mongoose, models }) => {
 			next();
 		});
 
+		app.use(express.static("public"));
+
 		app.use(
 			session({
 				secret: process.env.SECRET,

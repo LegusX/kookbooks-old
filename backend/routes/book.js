@@ -95,7 +95,7 @@ router.get("/:id/recipes", async (req, res) => {
 
 	const recipes = await req.db.Recipe.find({ books: id });
 	if (recipes === null) return res.status(404).end();
-	else res.status(200).json(recipes);
+	else res.status(200).json(recipes.map((recipe) => recipe.clean()));
 });
 
 export default router;

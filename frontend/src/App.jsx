@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 
 //Contexts
-import { ToastComponent } from "./components/toast.jsx";
+import { ToastComponent } from "./components/Toast.jsx";
 export const UserContext = createContext({});
 
 //routes
@@ -15,6 +15,7 @@ import Header from "./components/Header.jsx";
 
 import "./App.css";
 import { auth } from "./api/api.js";
+import KookbookRoute from "./routes/kookbook.jsx";
 
 function App() {
 	const [user, setUser] = useState(null);
@@ -34,6 +35,7 @@ function App() {
 						<Route path="/" element={<IndexRoute />}></Route>
 						<Route path="/login" element={<LoginRoute />} />
 						<Route path="/books" element={<KookbooksRoute />} />
+						<Route path="/books/:bookID" element={<KookbookRoute />} />
 					</Routes>
 				</BrowserRouter>
 				<ToastComponent />
