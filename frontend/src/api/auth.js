@@ -1,10 +1,4 @@
-import Axios from "axios";
-import config from "../../../config";
-
-//create custom axios instance
-const axios = Axios.create();
-axios.defaults.baseURL =
-	config[process.env.NODE_ENV].serverAddress + config.api;
+import axios from "./api";
 
 export async function signin(username, password, setUser) {
 	try {

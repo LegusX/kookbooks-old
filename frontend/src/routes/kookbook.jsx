@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { getRecipesByBook } from "../api/recipe";
+import RecipeComponent from "../components/Recipe";
 
 export default function KookbookRoute() {
 	const { bookID } = useParams();
@@ -7,7 +9,9 @@ export default function KookbookRoute() {
 	const [recipes, setRecipes] = useState(null);
 
 	useEffect(() => {
-		//get books
+		getRecipesByBook(bookID).then((res) => {
+			setRecipes(res);
+		});
 	}, []);
 	if (recipes === null)
 		return (
@@ -18,15 +22,22 @@ export default function KookbookRoute() {
 				/>
 			</div>
 		);
+	console.log(recipes);
+	const recipeComponents = recipes.map((recipe) => {
+		return <RecipeComponent recipe={recipe} />;
+	});
 	return (
 		<>
 			<div className="drawer drawer-mobile bg-base-100">
 				<input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 				<div className="drawer-content rounded-tl-sm bg-base-200">
 					<div className="grid grid-flow-row gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-4">
-						<p>hello world</p>
-						<p>hello world</p>
-						<p>hello world</p>
+						{recipes.length > 0 && recipeComponents}
+						{recipes.length === 0 && (
+							<h3 className="text-xl text-center">
+								Looks like there's nothing here...
+							</h3>
+						)}
 					</div>
 				</div>
 				<div className="drawer-side">
