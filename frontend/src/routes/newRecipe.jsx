@@ -9,8 +9,8 @@ export default function NewRecipeRoute() {
 	const thumbnail = useRef();
 
 	const pages = [
-		<div className="flex items-end gap-5">
-			<div>
+		<div className="flex items-end gap-5 flex-wrap lg:flex-nowrap ">
+			<div className="mr-4 lg:mr-0 flex-grow lg:flex-none">
 				<div className="form-control">
 					<label className="label">
 						<span className="label-text">Recipe Name</span>
@@ -30,7 +30,7 @@ export default function NewRecipeRoute() {
 					<textarea className="textarea textarea-bordered" ref={description} />
 				</div>
 			</div>
-			<div>
+			<div className="mr-4 lg:mr-0 ">
 				<div className="form-control">
 					<label className="label">
 						<span className="label-text">Thumbnail</span>
