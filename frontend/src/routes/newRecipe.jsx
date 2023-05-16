@@ -1,9 +1,14 @@
 import { useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { publishRecipe } from "../api/recipe";
 
 const fakeIngredientsPlaceholderText = "1 cup sugar\n2 cups flour";
 
 export default function NewRecipeRoute() {
+	const { bookID } = useParams();
+	const navigate = useNavigate();
+
 	const [page, setPage] = useState(0);
 	//the max page number a user can navigate to. when a page passes validation, this number will increment
 	const [canProgress, setCanProgress] = useState(0);
@@ -26,8 +31,25 @@ export default function NewRecipeRoute() {
 		} else return;
 	};
 
-	const publish = () => {
-		toast.success("something happened!");
+	const publish = async () => {
+		const recipe = {
+			name: recipeName,
+			description,
+			ingredients: ingredients.split("\n"),
+			directions,
+			thumbnail,
+			book: bookID,
+		};
+		const result = await publishRecipe(recipe);
+		switch (result) {
+			case "image": {
+				toast.error("Failed to upload image!");
+				break;
+			}
+			default: {
+				navigate("/recipes/" + result.id);
+			}
+		}
 	};
 
 	const pages = [
@@ -45,7 +67,7 @@ export default function NewRecipeRoute() {
 						value={recipeName}
 						onChange={(e) => {
 							setRecipeName(e.target.value);
-							setCanProgress(1);
+							if (e.target.value.length >= 3) setCanProgress(1);
 						}}
 					></input>
 				</div>
@@ -76,8 +98,10 @@ export default function NewRecipeRoute() {
 						type="file"
 						//TODO: Also include thumbnail preview
 						onChange={(e) => {
-							setThumbnail(e.target.files[0]);
+							setThumbnail(e.target.files);
 						}}
+						accept="image/*"
+						max="1"
 					></input>
 				</div>
 			</div>
@@ -97,12 +121,12 @@ export default function NewRecipeRoute() {
 				onBlur={() => {
 					if (ingredients === "") {
 						setIngredients(fakeIngredientsPlaceholderText);
-						setCanProgress(false);
+						setCanProgress(1);
 					}
 				}}
 				onChange={(e) => {
 					setIngredients(e.target.value);
-					setCanProgress(true);
+					setCanProgress(2);
 				}}
 			/>
 		</div>,
