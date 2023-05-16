@@ -55,7 +55,7 @@ export default function KookbookRoute() {
 						<div className="divider m-0" />
 						<button
 							className="btn btn-secondary"
-							onClick={() => navigate("/recipes/new")}
+							onClick={() => navigate("/recipes/new/" + bookID)}
 						>
 							New Recipe
 						</button>
