@@ -10,7 +10,7 @@ export default function NewRecipeRoute() {
 
 	const pages = [
 		<div className="flex items-end gap-5 flex-wrap lg:flex-nowrap ">
-			<div className="mr-4 lg:mr-0 flex-grow lg:flex-none">
+			<div className="flex-grow lg:flex-none">
 				<div className="form-control">
 					<label className="label">
 						<span className="label-text">Recipe Name</span>
@@ -30,7 +30,7 @@ export default function NewRecipeRoute() {
 					<textarea className="textarea textarea-bordered" ref={description} />
 				</div>
 			</div>
-			<div className="mr-4 lg:mr-0 ">
+			<div className="flex-grow lg:flex-none">
 				<div className="form-control">
 					<label className="label">
 						<span className="label-text">Thumbnail</span>
@@ -49,12 +49,12 @@ export default function NewRecipeRoute() {
 	return (
 		<div className="hero min-h-[80vh]">
 			<div className="card shadow-2xl bg-base-100 rounded-lg max-w-2xl">
-				<div className="card-body">
+				<div className="card-body px-4 lg:px-8">
 					<h1 className="card-title text-2xl break-words overflow-hidden">
 						{recipeName}
 					</h1>
 					<div>{pages[page]}</div>
-					<div>
+					<div className="flex justify-between mt-8">
 						<button
 							className={
 								page > 0 ? "btn btn-outline" : "btn btn-outline btn-disabled"
