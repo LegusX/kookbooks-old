@@ -26,6 +26,10 @@ export default function NewRecipeRoute() {
 		} else return;
 	};
 
+	const publish = () => {
+		toast.success("something happened!");
+	};
+
 	const pages = [
 		//Recipe name, description, thumbnail
 		<div className="flex items-end gap-5 flex-wrap lg:flex-nowrap ">
@@ -99,7 +103,7 @@ export default function NewRecipeRoute() {
 			/>
 		</div>,
 		//Recipe directions
-		<div>
+		<>
 			<h3 className="text-lg font-semibold">Directions</h3>
 			<div className="flex flex-row flex-wrap lg:flex-nowrap gap-5 mt-5  min-w-[40vw]">
 				<div className="flex-grow lg:flex-none flex flex-col gap-5 items-center">
@@ -131,7 +135,7 @@ export default function NewRecipeRoute() {
 					</button>
 				</div>
 			</div>
-		</div>,
+		</>,
 		//Finalize and publish
 		<div></div>,
 	];
@@ -153,7 +157,7 @@ export default function NewRecipeRoute() {
 							Directions
 						</li>
 						<li className={page >= 3 ? "step step-primary " : "step"}>
-							Publish!
+							Review
 						</li>
 					</ul>
 					<div>{pages[page]}</div>
@@ -169,19 +173,26 @@ export default function NewRecipeRoute() {
 						>
 							Previous
 						</button>
-						<button
-							className={
-								page < pages.length
-									? "btn btn-outline"
-									: "btn btn-outline btn-disabled"
-							}
-							onClick={() => {
-								setPage(page + 1);
-							}}
-							disabled={!canProgress}
-						>
-							Next
-						</button>
+						{page !== pages.length - 1 && (
+							<button
+								className={
+									page < pages.length
+										? "btn btn-outline"
+										: "btn btn-outline btn-disabled"
+								}
+								onClick={() => {
+									setPage(page + 1);
+								}}
+								disabled={!canProgress}
+							>
+								Next
+							</button>
+						)}
+						{page === pages.length - 1 && (
+							<button className="btn" onClick={() => publish()}>
+								Publish
+							</button>
+						)}
 					</div>
 				</div>
 			</div>
