@@ -51,6 +51,7 @@ export default function NewRecipeRoute() {
 						<span className="label-text">Description</span>
 						<span className="label-text text-xs font-light">(optional)</span>
 					</label>
+					{/* TODO: make description box bigger for those people who like to write autobiographies in their recipes */}
 					<textarea
 						className="textarea textarea-bordered"
 						// ref={description}
@@ -83,7 +84,7 @@ export default function NewRecipeRoute() {
 		<div>
 			<h3 className="text-lg font-semibold">Ingredients</h3>
 			<textarea
-				className="textarea textarea-bordered w-full min-h-[10rem] mt-4"
+				className="textarea textarea-bordered w-full min-h-[10rem] mt-4 lg:min-w-[30rem]"
 				value={ingredients}
 				//bit of hackiness to have a multiline "placeholder"
 				onFocus={() => {
@@ -137,20 +138,51 @@ export default function NewRecipeRoute() {
 			</div>
 		</>,
 		//Finalize and publish
-		<div></div>,
+		<div className="pt-5">
+			{description.length > 0 && (
+				<div className="prose pb-5">
+					<h3>Description</h3>
+					<p>{description}</p>
+				</div>
+			)}
+			<div className="flex flex-wrap lg:flex-nowrap flex-row justify-between min-w-[20rem]">
+				<div className="prose">
+					<h3>Ingredients</h3>
+					<ul>
+						{ingredients.split("\n").map((item, i) => (
+							<li key={i}>{item}</li>
+						))}
+					</ul>
+				</div>
+				<div className="prose basis-1/2">
+					<h3>Directions</h3>
+					<ol className=" max-h-56 w-full">
+						{directions.map((direction, i) => {
+							return <li key={i}>{direction}</li>;
+						})}
+					</ol>
+				</div>
+			</div>
+		</div>,
 	];
 
 	return (
 		<div className="hero min-h-[80vh]">
 			<div className="card shadow-2xl bg-base-100 rounded-lg max-w-2xl">
-				<div className="card-body px-4 lg:px-8">
+				<div className="card-body px-4 lg:px-8 lg:min-w-[40rem]">
 					<h1 className="card-title text-2xl break-words overflow-hidden">
 						{recipeName}
 					</h1>
 					<ul className="steps mt-4 ">
 						<li className={page >= 0 ? "step step-primary" : "step"}>Info</li>
 						{/* add a little extra spacing to fit everything on mobile screens */}
-						<li className={page >= 1 ? "step step-primary mr-8" : "step mr-8"}>
+						<li
+							className={
+								page >= 1
+									? "step step-primary mr-8 lg:mr-0"
+									: "step mr-8 lg:mr-0"
+							}
+						>
 							Ingredients
 						</li>
 						<li className={page >= 2 ? "step step-primary" : "step"}>
