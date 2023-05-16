@@ -3,12 +3,13 @@ import { useRef, useState } from "react";
 export default function NewRecipeRoute() {
 	const [recipeName, setRecipeName] = useState("New Recipe");
 	const [page, setPage] = useState(0);
-	const [canProgress, setCanProgress] = useState(false); //keep track of whether or not the user has filled out all required fields
+	const [canProgress, setCanProgress] = useState(true); //keep track of whether or not the user has filled out all required fields
 
 	const description = useRef();
 	const thumbnail = useRef();
 
 	const pages = [
+		//Recipe name, description, thumbnail
 		<div className="flex items-end gap-5 flex-wrap lg:flex-nowrap ">
 			<div className="flex-grow lg:flex-none">
 				<div className="form-control">
@@ -44,6 +45,9 @@ export default function NewRecipeRoute() {
 				</div>
 			</div>
 		</div>,
+		//Recipe ingredients
+		//TODO: Use parser on ingredients for better search capabilities: https://www.npmjs.com/package/recipes-parser
+		<div></div>,
 	];
 
 	return (
@@ -54,11 +58,27 @@ export default function NewRecipeRoute() {
 						{recipeName}
 					</h1>
 					<div>{pages[page]}</div>
-					<div className="flex justify-between mt-8">
+					<ul className="steps mt-4">
+						<li className={page >= 0 ? "step step-primary" : "step"}>Info</li>
+						{/* add a little extra spacing to fit everything on mobile screens */}
+						<li className={page >= 1 ? "step step-primary mr-8" : "step mr-8"}>
+							Ingredients
+						</li>
+						<li className={page >= 2 ? "step step-primary" : "step"}>
+							Directions
+						</li>
+						<li className={page >= 3 ? "step step-primary " : "step"}>
+							Publish!
+						</li>
+					</ul>
+					<div className="flex justify-between mt-4">
 						<button
 							className={
 								page > 0 ? "btn btn-outline" : "btn btn-outline btn-disabled"
 							}
+							onClick={() => {
+								setPage(page - 1);
+							}}
 						>
 							Previous
 						</button>
@@ -68,7 +88,9 @@ export default function NewRecipeRoute() {
 									? "btn btn-outline"
 									: "btn btn-outline btn-disabled"
 							}
-							onClick={() => {}}
+							onClick={() => {
+								setPage(page + 1);
+							}}
 							disabled={!canProgress}
 						>
 							Next
