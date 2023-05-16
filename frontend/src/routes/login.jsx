@@ -79,7 +79,7 @@ export default function LoginRoute() {
 		<div className="hero flex justify-center items-start">
 			<div className="card shadow-2xl bg-base-100 mt-28">
 				<div className="card-body text-center">
-					<h2 className="text-2xl">Welcome!</h2>
+					<h2 className="card-title">Welcome!</h2>
 					<div className="form-control">
 						<label className="label">
 							<span className="label-text">Username</span>

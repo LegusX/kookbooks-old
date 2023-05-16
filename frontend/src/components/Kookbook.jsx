@@ -4,7 +4,7 @@ export default function Kookbook({ book }) {
 	return (
 		<div className="card card-compact w-full drop-shadow-md rounded-xl">
 			<Link to={"/books/" + book.id}>
-				<div className="cursor-pointer hover:scale-105 transition:all ease-in-out duration-100">
+				<div className="cursor-pointer hover:scale-105 transition:all ease-in-out duration-100 min-h-full">
 					<figure className=" bg-primary min-h-8 rounded-t-xl"></figure>
 					<div className="card-body bg-base-100 rounded-b-md flex content-between">
 						<h2 className="text-xl break-words font-bold">{book.name}</h2>
