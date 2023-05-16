@@ -1,9 +1,10 @@
 import { useContext, useRef } from "react";
 import { UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import { signup } from "../api/auth";
 
 export default function SignupRoute() {
-	const { user } = useContext(UserContext);
+	const { user, setUser } = useContext(UserContext);
 	const navigate = useNavigate();
 
 	const name = useRef();
@@ -13,7 +14,18 @@ export default function SignupRoute() {
 	const confirmPassword = useRef();
 
 	//TODO: Validation
-	const submit = () => {};
+	const submit = async () => {
+		const result = await signup(
+			{
+				name: name.current.value,
+				username: username.current.value,
+				email: email.current.value,
+				password: password.current.value,
+			},
+			setUser
+		);
+		console.log(result);
+	};
 
 	if (user !== null && user.id) navigate("/home");
 
