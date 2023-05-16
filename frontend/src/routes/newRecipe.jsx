@@ -5,7 +5,8 @@ const fakeIngredientsPlaceholderText = "1 cup sugar\n2 cups flour";
 
 export default function NewRecipeRoute() {
 	const [page, setPage] = useState(0);
-	const [canProgress, setCanProgress] = useState(true); //keep track of whether or not the user has filled out all required fields
+	//the max page number a user can navigate to. when a page passes validation, this number will increment
+	const [canProgress, setCanProgress] = useState(0);
 
 	//keep all form values as states so that they can persist across the different pages, in case a user navigates back
 	const [recipeName, setRecipeName] = useState("New Recipe");
@@ -19,7 +20,6 @@ export default function NewRecipeRoute() {
 	const directionsElement = useRef();
 
 	const addDirections = () => {
-		console.log("addDirections");
 		if (directionsElement.current.value.length > 0) {
 			setDirections([...directions, directionsElement.current.value]);
 			directionsElement.current.value = "";
@@ -43,7 +43,10 @@ export default function NewRecipeRoute() {
 						type="text"
 						maxLength="50"
 						value={recipeName}
-						onChange={(e) => setRecipeName(e.target.value)}
+						onChange={(e) => {
+							setRecipeName(e.target.value);
+							setCanProgress(1);
+						}}
 					></input>
 				</div>
 				<div className="form-control">
@@ -106,7 +109,7 @@ export default function NewRecipeRoute() {
 		//Recipe directions
 		<>
 			<h3 className="text-lg font-semibold">Directions</h3>
-			<div className="flex flex-row flex-wrap lg:flex-nowrap gap-5 mt-5  min-w-[40vw]">
+			<div className="flex flex-row flex-wrap lg:flex-nowrap gap-5 mt-5  min-w-[40vw] justify-start">
 				<div className="flex-grow lg:flex-none flex flex-col gap-5 items-center">
 					<textarea
 						className="textarea textarea-bordered min-h-[14rem] w-full"
@@ -114,20 +117,28 @@ export default function NewRecipeRoute() {
 					></textarea>
 					<button
 						className="btn btn-primary btn-wide max-w-[10rem]"
-						onClick={() => addDirections()}
+						onClick={() => {
+							if (directions.length + 1 >= 2) setCanProgress(3);
+							addDirections();
+						}}
 					>
 						Add
 					</button>
 				</div>
-				<div className="flex-grow flex flex-col items-center prose">
-					<ol className="overflow-scroll max-h-56 border rounded-lg prose p-2 flex-grow w-full list-inside">
+				<div className=" flex flex-col items-center flex-wrap prose min-w-0 flex-grow">
+					<ol className="overflow-y-scroll overflow-x-auto max-h-56 border rounded-lg prose p-2 flex-grow min-w-full list-inside break-words max-w-[30rem]">
 						{directions.map((direction, i) => {
-							return <li key={i}>{direction}</li>;
+							return (
+								<li key={i} className="break-words">
+									{direction}
+								</li>
+							);
 						})}
 					</ol>
 					<button
 						className="btn btn-error btn-wide max-w-[10rem] btn-outline"
 						onClick={() => {
+							if (directions.length < 2) setCanProgress(2);
 							directions.pop();
 							setDirections([...directions]);
 						}}
@@ -145,7 +156,7 @@ export default function NewRecipeRoute() {
 					<p>{description}</p>
 				</div>
 			)}
-			<div className="flex flex-wrap lg:flex-nowrap flex-row justify-between min-w-[20rem]">
+			<div className="flex flex-wrap lg:flex-nowrap flex-col lg:flex-row justify-between min-w-[20rem]">
 				<div className="prose">
 					<h3>Ingredients</h3>
 					<ul>
@@ -168,8 +179,8 @@ export default function NewRecipeRoute() {
 
 	return (
 		<div className="hero min-h-[80vh]">
-			<div className="card shadow-2xl bg-base-100 rounded-lg max-w-2xl">
-				<div className="card-body px-4 lg:px-8 lg:min-w-[40rem]">
+			<div className="card shadow-2xl bg-base-100 rounded-lg max-w-[50rem]">
+				<div className="card-body px-4 lg:px-8 lg:min-w-[45rem]">
 					<h1 className="card-title text-2xl break-words overflow-hidden">
 						{recipeName}
 					</h1>
@@ -215,7 +226,7 @@ export default function NewRecipeRoute() {
 								onClick={() => {
 									setPage(page + 1);
 								}}
-								disabled={!canProgress}
+								disabled={page === canProgress}
 							>
 								Next
 							</button>
