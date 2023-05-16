@@ -18,6 +18,7 @@ import { auth } from "./api/api.js";
 import KookbookRoute from "./routes/kookbook.jsx";
 import SignupRoute from "./routes/signup.jsx";
 import NewRecipeRoute from "./routes/newRecipe.jsx";
+import RecipeRoute from "./routes/recipe.jsx";
 
 function App() {
 	const [user, setUser] = useState(null);
@@ -40,6 +41,7 @@ function App() {
 						<Route path="/books/:bookID" element={<KookbookRoute />} />
 						<Route path="/signup" element={<SignupRoute />} />
 						<Route path="/recipes/new/:bookID" element={<NewRecipeRoute />} />
+						<Route path="/recipes/:recipeID" element={<RecipeRoute />} />
 					</Routes>
 				</BrowserRouter>
 				<ToastComponent />
