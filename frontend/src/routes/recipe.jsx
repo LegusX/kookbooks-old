@@ -23,5 +23,21 @@ export default function RecipeRoute() {
 			</div>
 		);
 
-	return <p>{recipe.id}</p>;
+	return (
+		<div className="hero">
+			<div className="card bg-base-100 w-full lg:shadow-xl rounded-none lg:rounded-lg lg:max-w-[50rem] lg:mt-14">
+				<figure
+					style={{
+						"background-image": `url('/api/images/${recipe.thumbnail}.webp')`,
+					}}
+					className="h-32 bg-no-repeat bg-cover"
+				>
+					<h2 className="bg-[rgba(255,255,255,0.8)] w-full text-2xl font-bold px-4 py-2">
+						{recipe.name}
+					</h2>
+				</figure>
+				<div className="card-body"></div>
+			</div>
+		</div>
+	);
 }
