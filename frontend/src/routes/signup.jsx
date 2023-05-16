@@ -24,7 +24,6 @@ export default function SignupRoute() {
 			},
 			setUser
 		);
-		console.log(result);
 	};
 
 	if (user !== null && user.id) navigate("/home");
@@ -82,7 +81,7 @@ export default function SignupRoute() {
 									</label>
 									<input
 										className="input input-bordered"
-										type="text"
+										type="password"
 										placeholder="********"
 										ref={password}
 										maxLength="32"
@@ -94,7 +93,7 @@ export default function SignupRoute() {
 									</label>
 									<input
 										className="input input-bordered"
-										type="text"
+										type="password"
 										placeholder="********"
 										ref={confirmPassword}
 										maxLength="32"
