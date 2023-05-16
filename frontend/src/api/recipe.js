@@ -36,3 +36,13 @@ export async function publishRecipe(recipe) {
 		console.error(e);
 	}
 }
+
+export async function getRecipe(id) {
+	try {
+		const res = await axios.get("/recipe/" + id);
+		return res.data;
+	} catch (e) {
+		console.error(e);
+		return null;
+	}
+}
