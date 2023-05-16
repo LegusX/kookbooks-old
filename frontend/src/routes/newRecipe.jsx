@@ -14,6 +14,17 @@ export default function NewRecipeRoute() {
 	);
 	const [description, setDescription] = useState("");
 	const [thumbnail, setThumbnail] = useState([]);
+	const [directions, setDirections] = useState([]);
+
+	const directionsElement = useRef();
+
+	const addDirections = () => {
+		console.log("addDirections");
+		if (directionsElement.current.value.length > 0) {
+			setDirections([...directions, directionsElement.current.value]);
+			directionsElement.current.value = "";
+		} else return;
+	};
 
 	const pages = [
 		//Recipe name, description, thumbnail
@@ -88,7 +99,39 @@ export default function NewRecipeRoute() {
 			/>
 		</div>,
 		//Recipe directions
-		<div></div>,
+		<div>
+			<h3 className="text-lg font-semibold">Directions</h3>
+			<div className="flex flex-row flex-wrap lg:flex-nowrap gap-5 mt-5  min-w-[40vw]">
+				<div className="flex-grow lg:flex-none flex flex-col gap-5 items-center">
+					<textarea
+						className="textarea textarea-bordered min-h-[14rem] w-full"
+						ref={directionsElement}
+					></textarea>
+					<button
+						className="btn btn-primary btn-wide max-w-[10rem]"
+						onClick={() => addDirections()}
+					>
+						Add
+					</button>
+				</div>
+				<div className="flex-grow flex flex-col items-center prose">
+					<ol className="overflow-scroll max-h-56 border rounded-lg prose p-2 flex-grow w-full list-inside">
+						{directions.map((direction, i) => {
+							return <li key={i}>{direction}</li>;
+						})}
+					</ol>
+					<button
+						className="btn btn-error btn-wide max-w-[10rem] btn-outline"
+						onClick={() => {
+							directions.pop();
+							setDirections([...directions]);
+						}}
+					>
+						Remove
+					</button>
+				</div>
+			</div>
+		</div>,
 		//Finalize and publish
 		<div></div>,
 	];
