@@ -63,7 +63,7 @@ export default function NewRecipeRoute() {
 					<input
 						className="input input-bordered"
 						type="text"
-						maxLength="50"
+						maxLength="100"
 						value={recipeName}
 						onChange={(e) => {
 							setRecipeName(e.target.value);
@@ -175,7 +175,7 @@ export default function NewRecipeRoute() {
 		//Finalize and publish
 		<div className="pt-5">
 			{description.length > 0 && (
-				<div className="prose pb-5">
+				<div className="prose pb-5 max-w-none">
 					<h3>Description</h3>
 					<p>{description}</p>
 				</div>
@@ -191,7 +191,7 @@ export default function NewRecipeRoute() {
 				</div>
 				<div className="prose basis-1/2">
 					<h3>Directions</h3>
-					<ol className=" max-h-56 w-full">
+					<ol className=" w-full">
 						{directions.map((direction, i) => {
 							return <li key={i}>{direction}</li>;
 						})}
@@ -203,7 +203,7 @@ export default function NewRecipeRoute() {
 
 	return (
 		<div className="hero min-h-[80vh]">
-			<div className="card shadow-2xl bg-base-100 rounded-lg max-w-[50rem]">
+			<div className="card shadow-2xl bg-base-100 rounded-lg max-w-[50rem] md:mt-28">
 				<div className="card-body px-4 lg:px-8 lg:min-w-[45rem]">
 					<h1 className="card-title text-2xl break-words overflow-hidden">
 						{recipeName}

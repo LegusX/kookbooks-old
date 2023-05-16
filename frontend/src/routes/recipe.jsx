@@ -25,18 +25,47 @@ export default function RecipeRoute() {
 
 	return (
 		<div className="hero">
-			<div className="card bg-base-100 w-full lg:shadow-xl rounded-none lg:rounded-lg lg:max-w-[50rem] lg:mt-14">
+			<div className="card bg-base-100 w-full md:shadow-xl rounded-none md:rounded-lg md:max-w-3xl lg:max-w-4xl xl:max-w-5xl md:mt-14">
 				<figure
 					style={{
 						"background-image": `url('/api/images/${recipe.thumbnail}.webp')`,
 					}}
-					className="h-32 bg-no-repeat bg-cover"
+					className="h-32 bg-no-repeat bg-cover bg-center"
 				>
 					<h2 className="bg-[rgba(255,255,255,0.8)] w-full text-2xl font-bold px-4 py-2">
 						{recipe.name}
 					</h2>
 				</figure>
-				<div className="card-body"></div>
+				<div className="card-body items-center">
+					{recipe.description.length > 0 && (
+						<>
+							<div className="prose max-w-none w-full">
+								<h3>About</h3>
+								{recipe.description}
+							</div>
+							<div className="divider"></div>
+						</>
+					)}
+
+					<div className="flex w-full gap-10 prose justify-between max-w-none flex-col sm:flex-row">
+						<div className="prose flex-grow">
+							<h3 className=" capitalize">Ingredients</h3>
+							<ul>
+								{recipe.ingredients.map((item, i) => (
+									<li key={i}>{item}</li>
+								))}
+							</ul>
+						</div>
+						<div className="prose flex-grow">
+							<h3 className="capitalize">Directions</h3>
+							<ol>
+								{recipe.directions.map((item, i) => (
+									<li key={i}>{item}</li>
+								))}
+							</ol>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
