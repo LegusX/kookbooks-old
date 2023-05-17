@@ -23,7 +23,6 @@ export default function KookbookRoute() {
 			</div>
 		);
 	const recipeComponents = recipes.map((recipe) => {
-		console.log(recipe.id);
 		return <RecipeComponent recipe={recipe} key={recipe.id} />;
 	});
 	return (
@@ -48,7 +47,6 @@ export default function KookbookRoute() {
 							className="input input-sm input-bordered"
 							placeholder="Search recipes..."
 							onChange={(e) => {
-								console.log(e);
 								setQuery(e.target.value);
 							}}
 						></input>

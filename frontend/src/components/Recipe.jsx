@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 export default function RecipeComponent({ recipe }) {
 	const figure = useRef();
 
-	console.log(recipe);
 	return (
 		//TODO: Make thumbnail zoom in a little when you hover over it
 		//TODO: Expand card to show more ingredients when you hover over it, will require grid overlapping:

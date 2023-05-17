@@ -50,7 +50,7 @@ export default function KookbooksRoute() {
 							className="input input-sm input-bordered"
 							placeholder="Search kookbooks..."
 							onChange={(e) => {
-								console.log(e);
+								console.error(e);
 								setQuery(e.target.value);
 							}}
 						></input>

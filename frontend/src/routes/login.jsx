@@ -33,6 +33,7 @@ export default function LoginRoute() {
 		const status = await auth.signin(username, password, setUser);
 
 		// if (status.id)
+		//TODO: Figure out what on earth I meant to do with this if statement
 		if (status === false) return console.log("false");
 
 		if (formError) return; //Authentication failed, don't navigate away
