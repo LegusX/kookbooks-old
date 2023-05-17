@@ -14,7 +14,7 @@ import KookbooksRoute from "./routes/kookbooks.jsx";
 import Header from "./components/Header.jsx";
 
 import "./App.css";
-import { auth } from "./api/api.js";
+import { getSelf } from "./api/auth.js";
 import KookbookRoute from "./routes/kookbook.jsx";
 import SignupRoute from "./routes/signup.jsx";
 import NewRecipeRoute from "./routes/newRecipe.jsx";
@@ -25,7 +25,7 @@ function App() {
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
-		auth.getSelf().then((self) => {
+		getSelf().then((self) => {
 			setUser(self.data);
 		});
 	}, []);

@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
-import { auth } from "../api/api";
+import { logout } from "../api/auth";
 import ConfirmModal from "./ConfirmModal";
 
 export default function Header() {
@@ -141,7 +141,7 @@ export default function Header() {
 					text: "Continue",
 					callback: () => {
 						setLogout(false);
-						auth.logout(setUser);
+						logout(setUser);
 						navigate("/");
 					},
 				}}
