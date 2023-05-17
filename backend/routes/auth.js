@@ -55,10 +55,7 @@ export default function (models) {
 		});
 	});
 
-	router.get("/logout", (req, res) => {
-		res.json(null);
-	});
-
+	//allow client to get basic information about the signed in user, mainly for session management
 	router.get("/self", (req, res) => {
 		if (req.user)
 			res.status(200).json({

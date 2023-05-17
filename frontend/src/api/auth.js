@@ -15,7 +15,6 @@ export async function signin(username, password, setUser) {
 		console.error(e.message);
 		return false;
 	}
-	return false;
 }
 
 export async function getSelf() {
@@ -33,7 +32,7 @@ export async function signup(newUser, setUser) {
 	try {
 		const res = await axios.post("/auth/signup", newUser);
 		if ((res.status = 200)) {
-			//for some reason, passport isn't creating a session for the new user properly, so we have to resort to this.
+			//for some reason, passport isn't creating a session for the new user properly, so we have to resort to making three separate requests
 			await axios.post("/auth/password", {
 				username: newUser.username,
 				password: newUser.password,

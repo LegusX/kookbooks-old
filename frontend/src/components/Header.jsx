@@ -1,11 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
-import { auth } from "../api/api";
+import { logout } from "../api/auth";
 import ConfirmModal from "./ConfirmModal";
 
 export default function Header() {
-	const location = useLocation();
+	const location = useLocation(); //eventually to be used to highlight which major page you're on
 	const { user, setUser } = useContext(UserContext);
 	const [logoutOpen, setLogout] = useState(false);
 	const navigate = useNavigate();
@@ -36,12 +36,13 @@ export default function Header() {
 							tabIndex={0}
 							className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
 						>
-							<li>
+							{/* To be readded when it can be finished */}
+							{/* <li>
 								<Link to="/home">
 									<img src="/icons/home.svg" />
 									Home
 								</Link>
-							</li>
+							</li> */}
 							<li>
 								<Link to="/books">
 									<img src="/icons/book.svg" />
@@ -77,9 +78,9 @@ export default function Header() {
 					)}
 					{loggedIn && (
 						<>
-							<Link to="/home">
+							{/* <Link to="/home">
 								<button className="btn btn-ghost hidden md:block">Home</button>
-							</Link>
+							</Link> */}
 							<Link to="/books">
 								<button className="btn btn-ghost hidden md:flex">
 									My kookbooks
@@ -104,7 +105,8 @@ export default function Header() {
 									className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-40"
 									tabIndex={0}
 								>
-									<li>
+									{/* To be readded when it can be finished */}
+									{/* <li>
 										<Link to="/profile" className="justify-end">
 											Profile
 											<img src="/icons/profilecircle.svg" />
@@ -116,7 +118,7 @@ export default function Header() {
 											<img src="/icons/settings.svg" />
 										</Link>
 									</li>
-									<div className="divider m-0"></div>
+									<div className="divider m-0"></div> */}
 									<li>
 										<Link
 											className="justify-end"
@@ -139,7 +141,7 @@ export default function Header() {
 					text: "Continue",
 					callback: () => {
 						setLogout(false);
-						auth.logout(setUser);
+						logout(setUser);
 						navigate("/");
 					},
 				}}

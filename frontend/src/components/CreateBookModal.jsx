@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 export default function CreateBookModal({ open, setOpen }) {
 	const { user } = useContext(UserContext);
 	const navigate = useNavigate();
-	// const notify = useContext(ToastContext);
 	const input = useRef();
 	const textarea = useRef();
 
@@ -56,16 +55,6 @@ export default function CreateBookModal({ open, setOpen }) {
 						ref={textarea}
 					></textarea>
 				</div>
-				{/* <div className="form-control">
-						<label className="label">
-							<span className="label-text">Thumbnail</span>
-						</label>
-						<input
-							type="file"
-							className="file-input file-input-primary file-input-sm md:file-input-md w-full"
-							ref={file}
-						></input>
-					</div> */}
 				<div className="modal-action">
 					<button
 						className="btn btn-error btn-outline"

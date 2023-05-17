@@ -1,6 +1,3 @@
-import { signin, getSelf, logout } from "./auth";
-import { getBooksByUser } from "./books";
-
 import Axios from "axios";
 import config from "../../../config";
 
@@ -10,13 +7,3 @@ axios.defaults.baseURL =
 	config[process.env.NODE_ENV].serverAddress + config.api;
 
 export default axios;
-
-export const auth = {
-	signin,
-	getSelf,
-	logout,
-};
-
-export const books = {
-	getBooksByUser,
-};

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 export default function RecipeComponent({ recipe }) {
 	const figure = useRef();
 
-	console.log(recipe);
 	return (
 		//TODO: Make thumbnail zoom in a little when you hover over it
 		//TODO: Expand card to show more ingredients when you hover over it, will require grid overlapping:
@@ -22,9 +21,10 @@ export default function RecipeComponent({ recipe }) {
 					<div className="card-body bg-base-100 rounded-b-md flex content-between">
 						<h2 className="card-title break-words max-w-full">{recipe.name}</h2>
 						<div className="divider m-0"></div>
-						<div className="grid grid-flow-row grid-cols-3 px-2">
+						{/* Remove ingredients until I can find a way to format them better */}
+						{/* <div className="grid grid-flow-row grid-cols-3 px-2">
 							{recipe.ingredients.map((ingredient) => Ingredient(ingredient))}
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</Link>

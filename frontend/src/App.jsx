@@ -14,17 +14,18 @@ import KookbooksRoute from "./routes/kookbooks.jsx";
 import Header from "./components/Header.jsx";
 
 import "./App.css";
-import { auth } from "./api/api.js";
+import { getSelf } from "./api/auth.js";
 import KookbookRoute from "./routes/kookbook.jsx";
 import SignupRoute from "./routes/signup.jsx";
 import NewRecipeRoute from "./routes/newRecipe.jsx";
 import RecipeRoute from "./routes/recipe.jsx";
+import HomeRoute from "./routes/home.jsx";
 
 function App() {
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
-		auth.getSelf().then((self) => {
+		getSelf().then((self) => {
 			setUser(self.data);
 		});
 	}, []);
@@ -35,7 +36,8 @@ function App() {
 				<BrowserRouter>
 					<Header />
 					<Routes>
-						<Route path="/" element={<IndexRoute />}></Route>
+						<Route path="/" element={<IndexRoute />} />
+						<Route path="/home" element={<HomeRoute />} />
 						<Route path="/login" element={<LoginRoute />} />
 						<Route path="/books" element={<KookbooksRoute />} />
 						<Route path="/books/:bookID" element={<KookbookRoute />} />
