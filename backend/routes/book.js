@@ -61,6 +61,7 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
+//add existing recipe to book
 router.put("/:book/recipe/:recipe", async (req, res) => {
 	const bookID = req.params.book;
 	const recipeID = req.params.recipeID;
@@ -89,6 +90,7 @@ router.put("/:book/recipe/:recipe", async (req, res) => {
 	}
 });
 
+//get all recipes for a given book id
 router.get("/:id/recipes", async (req, res) => {
 	const id = req.params.id;
 	if (id.length !== 24) return res.status(400).end();

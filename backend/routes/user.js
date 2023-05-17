@@ -2,6 +2,7 @@ import { Router } from "express";
 
 const router = new Router();
 
+//get information for given user id
 router.get("/:id", async (req, res) => {
 	try {
 		//eventually include check for authenticated user, and if they are requesting themselves, give full details

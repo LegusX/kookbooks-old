@@ -15,6 +15,7 @@ router.use(
 	})
 );
 
+//create new image
 router.post("/", (req, res) => {
 	if (!req.files.thumbnail) return res.status(400).end();
 	else {

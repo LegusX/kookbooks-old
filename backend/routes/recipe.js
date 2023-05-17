@@ -3,8 +3,10 @@ import { ensureLoggedIn } from "connect-ensure-login";
 
 const router = new Router();
 
+//create new recipe
 router.post("/", ensureLoggedIn("/login"), async (req, res) => {
 	try {
+		//validation
 		if (req.body.name && req.body.name.length < 3)
 			return res.status(400).send("name");
 		if (typeof req.body.description !== "string") return res.status(400).end();
@@ -44,6 +46,7 @@ router.post("/", ensureLoggedIn("/login"), async (req, res) => {
 	}
 });
 
+//get recipe by id
 router.get("/:id", async (req, res) => {
 	try {
 		const id = req.params.id;
