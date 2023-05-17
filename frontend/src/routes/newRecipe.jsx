@@ -79,7 +79,6 @@ export default function NewRecipeRoute() {
 					{/* TODO: make description box bigger for those people who like to write autobiographies in their recipes */}
 					<textarea
 						className="textarea textarea-bordered"
-						// ref={description}
 						value={description}
 						onChange={(e) => {
 							setDescription(e.target.value);
