@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
+
+//Contexts
+import { ToastComponent } from "./components/Toast.jsx";
+export const UserContext = createContext({});
+
+//routes
+import { IndexRoute } from "./routes/index.jsx";
+import LoginRoute from "./routes/login.jsx";
+import KookbooksRoute from "./routes/kookbooks.jsx";
+
+//components
+import Header from "./components/Header.jsx";
+
+import "./App.css";
+import { getSelf } from "./api/auth.js";
+import KookbookRoute from "./routes/kookbook.jsx";
+import SignupRoute from "./routes/signup.jsx";
+import NewRecipeRoute from "./routes/newRecipe.jsx";
+import RecipeRoute from "./routes/recipe.jsx";
+import HomeRoute from "./routes/home.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+	const [user, setUser] = useState(null);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	useEffect(() => {
+		getSelf().then((self) => {
+			setUser(self.data);
+		});
+	}, []);
+
+	return (
+		<UserContext.Provider value={{ user: user, setUser: setUser }}>
+			<div className="min-h-screen bg-base-200">
+				<BrowserRouter>
+					<Header />
+					<Routes>
+						<Route path="/" element={<IndexRoute />} />
+						<Route path="/home" element={<HomeRoute />} />
+						<Route path="/login" element={<LoginRoute />} />
+						<Route path="/books" element={<KookbooksRoute />} />
+						<Route path="/books/:bookID" element={<KookbookRoute />} />
+						<Route path="/signup" element={<SignupRoute />} />
+						<Route path="/recipes/new/:bookID" element={<NewRecipeRoute />} />
+						<Route path="/recipes/:recipeID" element={<RecipeRoute />} />
+					</Routes>
+				</BrowserRouter>
+				<ToastComponent />
+			</div>
+		</UserContext.Provider>
+	);
 }
 
-export default App
+export default App;
