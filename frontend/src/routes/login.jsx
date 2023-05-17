@@ -14,6 +14,8 @@ export default function LoginRoute() {
 	var formError = false;
 	var errorMessage = "";
 
+	if (user !== null && user.id) return navigate("/home");
+
 	const submit = async () => {
 		const username = usernameInput.current.value;
 		const password = passwordInput.current.value;

@@ -19,6 +19,7 @@ import KookbookRoute from "./routes/kookbook.jsx";
 import SignupRoute from "./routes/signup.jsx";
 import NewRecipeRoute from "./routes/newRecipe.jsx";
 import RecipeRoute from "./routes/recipe.jsx";
+import HomeRoute from "./routes/home.jsx";
 
 function App() {
 	const [user, setUser] = useState(null);
@@ -35,7 +36,8 @@ function App() {
 				<BrowserRouter>
 					<Header />
 					<Routes>
-						<Route path="/" element={<IndexRoute />}></Route>
+						<Route path="/" element={<IndexRoute />} />
+						<Route path="/home" element={<HomeRoute />} />
 						<Route path="/login" element={<LoginRoute />} />
 						<Route path="/books" element={<KookbooksRoute />} />
 						<Route path="/books/:bookID" element={<KookbookRoute />} />

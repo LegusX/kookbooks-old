@@ -36,12 +36,13 @@ export default function Header() {
 							tabIndex={0}
 							className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
 						>
-							<li>
+							{/* To be readded when it can be finished */}
+							{/* <li>
 								<Link to="/home">
 									<img src="/icons/home.svg" />
 									Home
 								</Link>
-							</li>
+							</li> */}
 							<li>
 								<Link to="/books">
 									<img src="/icons/book.svg" />
@@ -77,9 +78,9 @@ export default function Header() {
 					)}
 					{loggedIn && (
 						<>
-							<Link to="/home">
+							{/* <Link to="/home">
 								<button className="btn btn-ghost hidden md:block">Home</button>
-							</Link>
+							</Link> */}
 							<Link to="/books">
 								<button className="btn btn-ghost hidden md:flex">
 									My kookbooks
@@ -104,7 +105,8 @@ export default function Header() {
 									className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-40"
 									tabIndex={0}
 								>
-									<li>
+									{/* To be readded when it can be finished */}
+									{/* <li>
 										<Link to="/profile" className="justify-end">
 											Profile
 											<img src="/icons/profilecircle.svg" />
@@ -116,7 +118,7 @@ export default function Header() {
 											<img src="/icons/settings.svg" />
 										</Link>
 									</li>
-									<div className="divider m-0"></div>
+									<div className="divider m-0"></div> */}
 									<li>
 										<Link
 											className="justify-end"
