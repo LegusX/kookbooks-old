@@ -5,7 +5,7 @@ import { logout } from "../api/auth";
 import ConfirmModal from "./ConfirmModal";
 
 export default function Header() {
-	const location = useLocation();
+	const location = useLocation(); //eventually to be used to highlight which major page you're on
 	const { user, setUser } = useContext(UserContext);
 	const [logoutOpen, setLogout] = useState(false);
 	const navigate = useNavigate();

@@ -21,9 +21,10 @@ export default function RecipeComponent({ recipe }) {
 					<div className="card-body bg-base-100 rounded-b-md flex content-between">
 						<h2 className="card-title break-words max-w-full">{recipe.name}</h2>
 						<div className="divider m-0"></div>
-						<div className="grid grid-flow-row grid-cols-3 px-2">
+						{/* Remove ingredients until I can find a way to format them better */}
+						{/* <div className="grid grid-flow-row grid-cols-3 px-2">
 							{recipe.ingredients.map((ingredient) => Ingredient(ingredient))}
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</Link>
