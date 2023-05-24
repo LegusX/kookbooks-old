@@ -11,3 +11,6 @@ A website for managing and sharing cookbooks and recipes.
    - Authentication isn't yet set up for the database, so don't worry about the username/password variables
 5. Start the servers `npm run dev` for both frontend and backend
 6. Navigate to `localhost:5173` in your web browser (Or whatever port Vite tells you to use, if that one is already in use)
+
+## Grading
+I will be continuing to work on this project after the due date, so to whomever is grading this, you can check out the `grading` branch for everything done before the due date
