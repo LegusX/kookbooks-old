@@ -1,6 +1,7 @@
 const config = {
 	production: {
-		serverAddress: "https://api.kookbooks.app",
+		serverAddress:"/api",
+		//serverAddress: "https://api.kookbooks.app",
 		serverPort: "443",
 	},
 	development: {

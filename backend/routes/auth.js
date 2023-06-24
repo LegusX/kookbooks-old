@@ -43,7 +43,8 @@ export default function (models) {
 	router.post(
 		"/password",
 		passport.authenticate("local", {
-			successReturnToOrRedirect: "/api",
+//			successReturnToOrRedirect: "/api",
+			successReturnToOrRedirect: "/",
 			failureRedirect: "/asdf",
 		})
 	);

@@ -23,8 +23,8 @@ db().then(({ mongoose, models }) => {
 		const app = express();
 
 		app.use(cors());
-
 		app.use((req, res, next) => {
+			console.log("hello world!");
 			req.db = { mongoose, ...models };
 			next();
 		});
