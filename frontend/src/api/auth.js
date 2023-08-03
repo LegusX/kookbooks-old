@@ -18,7 +18,11 @@ export async function signin(username, password, setUser) {
 }
 
 export async function getSelf() {
-	return await axios.get("/auth/self");
+	try {
+		let res = await axios.get("/auth/self");
+		return res
+	}
+	catch(e){return {data:null}}
 }
 
 export async function logout(setUser) {

@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../api/auth";
@@ -14,6 +14,14 @@ export default function SignupRoute() {
 	const confirmPassword = useRef();
 
 	//TODO: Validation
+	let valid = true
+	useEffect(()=>{
+		name.current.addEventListener("change", ()=>{
+			if (name.current.value.length < 3) name.current.style.borderColor = "red"
+			else name.current.style.borderColor = ""
+		})
+	}, [])
+
 	const submit = async () => {
 		const result = await signup(
 			{

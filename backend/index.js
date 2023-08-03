@@ -1,6 +1,6 @@
 import express, { json } from "express";
 import * as dotenv from "dotenv";
-import db from "./db/db.js";
+import db, {connectURI} from "./db/db.js";
 import MongoStore from "connect-mongo";
 import session from "express-session";
 import passport from "passport";
@@ -37,7 +37,7 @@ db().then(({ mongoose, models }) => {
 				saveUninitialized: false,
 				resave: false,
 				store: MongoStore.create({
-					mongoUrl: `mongodb://127.0.0.1:27017/${process.env.DB_NAME}`,
+					mongoUrl: connectURI,
 					touchAfter: 24 * 3600, //only update session once per 24 hours
 					ttl: 60 * 60 * 24 * 30, //session lasts for a month
 				}),
